@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:track_seizure/component/constants.dart';
 
-class TrackingPage extends StatefulWidget {
-  TrackingPage({Key key}) : super(key: key);
+class StatsPage extends StatefulWidget {
+  StatsPage({Key key}) : super(key: key);
 
   @override
-  _TrackingPageState createState() => _TrackingPageState();
+  _StatsPageState createState() => _StatsPageState();
 }
 
-class _TrackingPageState extends State<TrackingPage> {
+class _StatsPageState extends State<StatsPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
         children: <Widget>[
           Center(
             child: Text(
-              'Anything up today?',
+              'Here\'s your monthly statistics',
               style: trackHeaderStyle,
             ),
           )
