@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
     TrackingPage(),
     LogPage(),
     StatsPage(),
+    SettingPage()
   ];
 
   @override
@@ -46,9 +47,15 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(FontAwesome.bar_chart),
           title: Text('Statistics'),
         ),
+        BottomNavigationBarItem(
+          icon: Icon(FontAwesome.cog),
+          title: Text('Settings'),
+        ),
       ],
       currentIndex: _selectedIndex,
-      selectedItemColor: Colors.purple[700],
+      selectedItemColor: Color(0xFF804CD9),
+      unselectedItemColor: Colors.grey[400],
+      backgroundColor: Colors.white70,
       onTap: _onItemTapped,
     ),
     body: screenBuilder[_selectedIndex],

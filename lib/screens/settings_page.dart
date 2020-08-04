@@ -17,7 +17,7 @@ class _SettingPageState extends State<SettingPage> {
         children: <Widget>[
           Center(
             child: Text(
-              'Setting Screen',
+              'Settings Screen',
               style: trackHeaderStyle,
             ),
           )
