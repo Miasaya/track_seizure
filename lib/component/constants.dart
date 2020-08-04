@@ -28,7 +28,7 @@ const TextStyle kNewEntryTextStyleInactive = TextStyle(
   );
 
 const TextStyle kNewEntryTextStyleActive = TextStyle(
-  fontSize: 18, 
+  fontSize: 17, 
   fontWeight: FontWeight.bold,
   fontFamily: 'April',
   color: Colors.white,
