@@ -6,3 +6,10 @@ const TextStyle trackHeaderStyle = TextStyle(
   fontFamily: 'Open',
   color: Color(0xFF252726),
   );
+
+const TextStyle kHeaderTextStyle = TextStyle(
+  fontSize: 28, 
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Open',
+  color: Colors.white,
+  );
