@@ -20,3 +20,16 @@ const TextStyle kTrackingButton = TextStyle(
   fontFamily: 'Open',
   color: Colors.white,
   );
+
+const TextStyle kNewEntryTextStyleInactive = TextStyle(
+  fontSize: 15, 
+  fontFamily: 'April',
+  color: Colors.white,
+  );
+
+const TextStyle kNewEntryTextStyleActive = TextStyle(
+  fontSize: 18, 
+  fontWeight: FontWeight.bold,
+  fontFamily: 'April',
+  color: Colors.white,
+  );

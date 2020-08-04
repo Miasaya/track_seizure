@@ -12,7 +12,7 @@ class Header extends StatelessWidget {
       clipper: TrackClipper(),
       child: Container(
           width: double.infinity,
-          height: 320.0,
+          height: 450.0,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.bottomRight,
@@ -24,31 +24,21 @@ class Header extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Expanded(
-                  child: Stack(
+                child: Stack(
                 children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50.0),
+                    child: Text('Track. Analyse. Break Free.', style : kHeaderTextStyle),
+                  ),   
                   Positioned(
-                    left : 150,
+                    top: 80,
                     child: Image.asset(
                       'assets/images/doctor.png',
-                      width: 280,
+                      width: 330,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  Positioned(
-                    top: 100,
-                    left :20,
-                    child: Text('Track.', style : kHeaderTextStyle),
-                  ),
-                  Positioned(
-                    top: 130,
-                    left :20,
-                    child: Text('Analyse.', style : kHeaderTextStyle),
-                  ),
-                  Positioned(
-                    top: 160,
-                    left :20,
-                    child: Text('Break Free.', style : kHeaderTextStyle),
-                  ),                     
+                     
                 ],
               )),
             ],
@@ -63,7 +53,7 @@ class TrackClipper extends CustomClipper<Path> {
     Path path = Path();
     path.lineTo(0, size.height - 80);
     path.quadraticBezierTo(
-        size.width / 2, size.height, size.width, size.height - 100);
+        size.width / 2, size.height, size.width, size.height - 90);
     path.lineTo(size.width, 0);
     path.close();
 
