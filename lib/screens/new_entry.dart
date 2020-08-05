@@ -4,12 +4,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 enum Type { absence, tc, other }
 
-enum Feeling {
-  pls,
-  sore,
-  fine,
-}
-
 class NewEntryPage extends StatefulWidget {
   NewEntryPage({Key key}) : super(key: key);
 
@@ -18,9 +12,11 @@ class NewEntryPage extends StatefulWidget {
 }
 
 class _NewEntryPageState extends State<NewEntryPage> {
+  TextEditingController nameController = TextEditingController();
   Type selectedType;
-  double lenght = 1.0;
-  Feeling feel;
+  int lenght = 60;
+  int feel = 5;
+  String note = "";
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +24,11 @@ class _NewEntryPageState extends State<NewEntryPage> {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            Text('Which type of seizure ?',style: trackHeaderStyle,),
+            SizedBox(height: 40.0),
+            Text(
+              'Which type of seizure ?',
+              style: trackHeaderStyle,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -76,10 +76,78 @@ class _NewEntryPageState extends State<NewEntryPage> {
                 ),
               ],
             ),
-            
+            SizedBox(height: 15.0),
+            Text(
+              'Lenght : $lenght sec',
+              style: trackHeaderStyle,
+            ),
+            SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  inactiveTrackColor: Color(0xFFd9d9d9),
+                  activeTrackColor: Color(0xFF6D4EA8),
+                  thumbColor: Color(0xFF804CD9),
+                  overlayColor: Color(0x295126AB),
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+                ),
+                child: Slider(
+                    value: lenght.toDouble(),
+                    min: 10.0,
+                    max: 120.0,
+                    onChanged: (double newValue) {
+                      setState(() {
+                        lenght = newValue.round();
+                      });
+                    })),
+            SizedBox(height: 15.0),
+            Text(
+              'Intensity : $feel /10',
+              style: trackHeaderStyle,
+            ),
+            SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  inactiveTrackColor: Color(0xFFd9d9d9),
+                  activeTrackColor: Color(0xFF6D4EA8),
+                  thumbColor: Color(0xFF804CD9),
+                  overlayColor: Color(0x295126AB),
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
+                  overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+                ),
+                child: Slider(
+                    value: feel.toDouble(),
+                    max: 10.0,
+                    onChanged: (double newValue) {
+                      setState(() {
+                        feel = newValue.round();
+                      });
+                    })),
+            SizedBox(height: 15.0),
+            Text(
+              'Additional notes:',
+              style: trackHeaderStyle,
+            ),          
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFcec5db),
+                  hintText: 'Anything Else?',
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    borderSide: BorderSide(color: Colors.grey)
+                    ),
+                ),
+                onChanged: (text) {
+                  setState(() {
+                    note = text;
+                  });
+                },
+              ),
+            ),
           ],
-        )
-      );
+        ));
   }
 }
 
