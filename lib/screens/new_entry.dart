@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track_seizure/component/constants.dart';
+import 'package:track_seizure/component/entryComponents.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 enum Type { absence, tc, other }
@@ -84,8 +85,8 @@ class _NewEntryPageState extends State<NewEntryPage> {
             SliderTheme(
                 data: SliderTheme.of(context).copyWith(
                   inactiveTrackColor: Color(0xFFd9d9d9),
-                  activeTrackColor: Color(0xFF6D4EA8),
-                  thumbColor: Color(0xFF804CD9),
+                  activeTrackColor: kBottomGradientColor,
+                  thumbColor: kBottomGradientColor,
                   overlayColor: Color(0x295126AB),
                   thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
                   overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
@@ -107,8 +108,8 @@ class _NewEntryPageState extends State<NewEntryPage> {
             SliderTheme(
                 data: SliderTheme.of(context).copyWith(
                   inactiveTrackColor: Color(0xFFd9d9d9),
-                  activeTrackColor: Color(0xFF6D4EA8),
-                  thumbColor: Color(0xFF804CD9),
+                  activeTrackColor: kBottomGradientColor,
+                  thumbColor: kBottomGradientColor,
                   overlayColor: Color(0x295126AB),
                   thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
                   overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
@@ -125,20 +126,14 @@ class _NewEntryPageState extends State<NewEntryPage> {
             Text(
               'Additional notes:',
               style: trackHeaderStyle,
-            ),          
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                style: kInputTextStyle,
                 controller: nameController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xFFcec5db),
-                  hintText: 'Anything Else?',
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    borderSide: BorderSide(color: Colors.grey)
-                    ),
-                ),
+                cursorColor: Colors.white,
+                decoration: noteDecoration(),
                 onChanged: (text) {
                   setState(() {
                     note = text;
@@ -146,51 +141,14 @@ class _NewEntryPageState extends State<NewEntryPage> {
                 },
               ),
             ),
+            SizedBox(height: 20,),
+            EntryButton(
+              text: 'Save',
+              onPress: () {
+                Navigator.pop(context);
+              },
+            ),
           ],
         ));
-  }
-}
-
-class EntryOption extends StatelessWidget {
-  EntryOption(
-      {@required this.colour,
-      this.text,
-      this.icon,
-      this.onPress,
-      this.textstyle});
-
-  final Color colour;
-  final String text;
-  final Function onPress;
-  final TextStyle textstyle;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPress,
-      child: Container(
-        width: 100.0,
-        height: 80.0,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: 40.0,
-              ),
-            ),
-            Text(text, style: textstyle),
-          ],
-        ),
-        margin: EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-          color: colour,
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-      ),
-    );
   }
 }

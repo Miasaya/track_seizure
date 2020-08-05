@@ -18,8 +18,8 @@ class Header extends StatelessWidget {
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
                   colors: [
-                Color(0xFF554BD8),
-                Color(0xFF804CD9),
+                kBottomGradientColor,
+                kTopGradientColor,
               ])),
           child: Column(
             children: <Widget>[

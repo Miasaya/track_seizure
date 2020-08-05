@@ -33,3 +33,14 @@ const TextStyle kNewEntryTextStyleActive = TextStyle(
   fontFamily: 'April',
   color: Colors.white,
   );
+
+const TextStyle kInputTextStyle = TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'April',
+  color: Colors.white
+);
+
+const Color kBottomGradientColor = Color(0xFF554BD8);
+
+const Color kTopGradientColor = Color(0xFF804CD9);
