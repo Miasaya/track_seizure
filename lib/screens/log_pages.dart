@@ -24,8 +24,8 @@ class _LogPageState extends State<LogPage> {
               Seizure elem = snapshot.data[index]; 
               return Card(
                 child: ListTile(
-                  title: Text(elem.date,style: kInputTextStyle),
-                  subtitle: Text(elem.type, style : kNewEntryTextStyleInactive),
+                  title: Text(elem.date,style:  trackHeaderStyle ),
+                  subtitle: Text(elem.type, style : kEntryDate),
                 ),
               );
             },
