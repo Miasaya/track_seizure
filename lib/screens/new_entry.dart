@@ -18,9 +18,8 @@ class NewEntryPage extends StatefulWidget {
 }
 
 class _NewEntryPageState extends State<NewEntryPage> {
-  DatabaseService dbService = DatabaseService();
   TextEditingController nameController = TextEditingController();
-  Type selectedType;
+  String selectedType = "";
   int length = 60;
   int feel = 5;
   String note = "";
@@ -75,11 +74,11 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     icon: FontAwesome.eye,
                     onPress: () {
                       setState(() {
-                        selectedType = Type.absence;
+                        selectedType = "Absence";
                       });
                       print(selectedType);
                     },
-                    textstyle: selectedType == Type.absence
+                    textstyle: selectedType == "Absence"
                         ? kNewEntryTextStyleActive
                         : kNewEntryTextStyleInactive,
                   ),
@@ -89,11 +88,11 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     icon: FontAwesome.male,
                     onPress: () {
                       setState(() {
-                        selectedType = Type.tc;
+                        selectedType = "Generalized";
                       });
                       print(selectedType);
                     },
-                    textstyle: selectedType == Type.tc
+                    textstyle: selectedType == "Generalized"
                         ? kNewEntryTextStyleActive
                         : kNewEntryTextStyleInactive,
                   ),
@@ -103,11 +102,11 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     icon: FontAwesome.question,
                     onPress: () {
                       setState(() {
-                        selectedType = Type.other;
+                        selectedType = "Other";
                       });
                       print(selectedType);
                     },
-                    textstyle: selectedType == Type.other
+                    textstyle: selectedType == "Other"
                         ? kNewEntryTextStyleActive
                         : kNewEntryTextStyleInactive,
                   ),
@@ -184,7 +183,8 @@ class _NewEntryPageState extends State<NewEntryPage> {
                 text: 'Save',
                 onPress: () {
                   print(DateTime.now().toString());
-                  Seizure entry = Seizure(date: DateTime.now(),type: selectedType,length: length,feel: feel,note: note); 
+                  Seizure entry = Seizure(date: date_time,type: selectedType,length: length,feel: feel,note: note); 
+                  DatabaseService.db.createSeize(entry);
                   Navigator.pop(context);
                 },
               ),

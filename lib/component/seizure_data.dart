@@ -1,22 +1,39 @@
+import 'dart:convert';
 
 enum Type { absence, tc, other }
 
+List<Seizure> seizureFromJson(String str) => List<Seizure>.from(json.decode(str).map((x) => Seizure.fromMap(x)));
+
+String seizureToJson(List<Seizure> data) => json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
+
 class Seizure {
-  final DateTime date; 
-  final Type type; 
-  final int length;
-  final int feel;
-  final String note;
+    Seizure({
+        this.date,
+        this.type,
+        this.length,
+        this.feel,
+        this.note,
+    });
 
-  Seizure({this.date,this.feel,this.length,this.note,this.type});
+    String date;
+    String type;
+    int length;
+    int feel;
+    String note;
 
-  Map<String,dynamic> toMap(){
-    return {
-      'date': date, 
-      'type': type, 
-      'length': length, 
-      'feel' : feel, 
-      'note' : note,
+    factory Seizure.fromMap(Map<String, dynamic> json) => Seizure(
+        date: json["Date"],
+        type: json["Type"],
+        length: json["Length"],
+        feel: json["Feel"],
+        note: json["Note"],
+    );
+
+    Map<String, dynamic> toMap() => {
+        "Date": date,
+        "Type": type,
+        "Length": length,
+        "Feel": feel,
+        "Note": note,
     };
-  }
 }

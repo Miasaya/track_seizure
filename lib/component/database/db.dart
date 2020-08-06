@@ -2,42 +2,53 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:track_seizure/component/seizure_data.dart';
 import 'dart:async';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart'; 
+import 'dart:io';
 
 class DatabaseService{
-  static final DatabaseService _instance = DatabaseService._internal(); 
+  DatabaseService._();
+  static final DatabaseService db = DatabaseService._(); 
+  Database _database;
 
-  Future<Database> database; 
-
-  factory DatabaseService(){
-    return _instance;
-  }
-  DatabaseService._internal(){
-    initDataBase(); 
+  Future<Database> get database async {
+    if (_database != null) return _database; 
+    _database = await initDataBase(); 
+    return _database;
   }
 
   initDataBase() async {
-    database = openDatabase(
-      join(await getDatabasesPath(),'seizure_db.db'), 
-      onCreate: (db,version){
-        return db.execute(
-          "CREATE TABLE seizures(date DATE PRIMARY KEY, type STRING, length INT, feel INT, note STRING)",);
+    Directory directory = await getApplicationSupportDirectory(); 
+    String path = join(directory.path,'seizure_db.db');
+    return openDatabase(
+      path, 
+      onCreate: (Database db, int version) async {
+        db.execute(
+          "CREATE TABLE seizures(date TEXT PRIMARY KEY, type TEXT, length INT, feel INT, note TEXT)",);
         }, 
     version: 1
     );
   }
-  Future<void> createSeize(Seizure seizure) async {
+  createSeize(Seizure seizure) async {
     final Database db = await database; 
     await db.insert('seizures', seizure.toMap(),conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<void> updateSeize(Seizure seizure) async {
+  updateSeize(Seizure seizure) async {
     final Database db = await database; 
     await db.update('seizures', seizure.toMap(),where: "date = ?",whereArgs: [seizure.date]);
   }
 
-  Future<void> deleteSeize(DateTime date) async {
+  deleteSeize(DateTime date) async {
     final Database db = await database; 
     await db.delete('seizures', where: "date = ?",whereArgs: [date]);
+  }
+  
+  Future<List<Seizure>> getAllSeizures() async {
+    final db = await database;
+    var response = await db.query("seizures"); 
+    List<Seizure> list = response.map((c)=> Seizure.fromMap(c)).toList();
+    return list;
   }
 }
 
