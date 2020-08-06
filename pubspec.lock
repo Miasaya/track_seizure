@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+  csv:
+    dependency: "direct main"
+    description:
+      name: csv
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.3"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -97,6 +104,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_datetime_picker:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: patch-1
+      resolved-ref: "974f3d805dec941435fe62289e1948ba7d979f05"
+      url: "https://github.com/ditheshthegreat/flutter_datetime_picker"
+    source: git
+    version: "1.3.8"
   flutter_icons:
     dependency: "direct main"
     description:
@@ -111,13 +127,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.5"
-  flutter_spinkit:
-    dependency: "direct main"
-    description:
-      name: flutter_spinkit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.1.2+1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -138,7 +147,7 @@ packages:
     source: hosted
     version: "2.1.14"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"

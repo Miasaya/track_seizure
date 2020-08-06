@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:path/path.dart'; 
-import 'package:sqflite/sqflite.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
+
 import 'package:track_seizure/component/database/db.dart';
-
-
 import 'package:track_seizure/component/seizure_data.dart';
 import 'package:track_seizure/component/header.dart';
 import 'package:track_seizure/component/constants.dart';
@@ -25,6 +24,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
   int length = 60;
   int feel = 5;
   String note = "";
+  String date_time = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +34,34 @@ class _NewEntryPageState extends State<NewEntryPage> {
           child: Column(
             children: [
               EntryHeader(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Time: ',
+                    style: trackHeaderStyle,
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      DatePicker.showDateTimePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime(2018, 3, 5),
+                        maxTime: DateTime.now(), 
+                        onConfirm: (date) {
+                          setState(() {
+                            date_time = (DateFormat('yyyy-MM-dd – kk:mm').format(date)).toString();
+                          });
+                          print(date_time);
+                        }, 
+                        currentTime: DateTime.now(), 
+                        locale: LocaleType.en
+                        );
+                      },
+                    child: Text(date_time, style: kEntryDate,),
+                    ),
+                ],
+              ),
               Text(
                 'Which type of seizure ?',
                 style: trackHeaderStyle,
@@ -87,7 +115,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
               ),
               SizedBox(height: 15.0),
               Text(
-                'length : $length sec',
+                'Length : $length sec',
                 style: trackHeaderStyle,
               ),
               SliderTheme(
@@ -155,8 +183,8 @@ class _NewEntryPageState extends State<NewEntryPage> {
               EntryButton(
                 text: 'Save',
                 onPress: () {
+                  print(DateTime.now().toString());
                   Seizure entry = Seizure(date: DateTime.now(),type: selectedType,length: length,feel: feel,note: note); 
-                  dbService.createSeize(entry);
                   Navigator.pop(context);
                 },
               ),

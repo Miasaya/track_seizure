@@ -41,6 +41,12 @@ const TextStyle kInputTextStyle = TextStyle(
   color: Colors.white
 );
 
+const TextStyle kEntryDate= TextStyle(
+  fontSize: 20, 
+  fontWeight: FontWeight.normal,
+  fontFamily: 'Open',
+  color: Color(0xFF707070),
+  );
 const Color kBottomGradientColor = Color(0xFF554BD8);
 
 const Color kTopGradientColor = Color(0xFF804CD9);
