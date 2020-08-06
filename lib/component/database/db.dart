@@ -3,7 +3,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:track_seizure/component/seizure_data.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart'; 
 import 'dart:io';
 
 class DatabaseService{
@@ -47,8 +46,15 @@ class DatabaseService{
   Future<List<Seizure>> getAllSeizures() async {
     final db = await database;
     var response = await db.query("seizures"); 
-    List<Seizure> list = response.map((c)=> Seizure.fromMap(c)).toList();
-    return list;
+    return List.generate(response.length, (i) {
+    return Seizure(
+      date: response[i]['date'],
+      type: response[i]['type'],
+      length: response[i]['length'],
+      feel: response[i]['feel'],
+      note: response[i]['note']
+    );
+  });
   }
 }
 

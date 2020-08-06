@@ -76,7 +76,6 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       setState(() {
                         selectedType = "Absence";
                       });
-                      print(selectedType);
                     },
                     textstyle: selectedType == "Absence"
                         ? kNewEntryTextStyleActive
@@ -90,7 +89,6 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       setState(() {
                         selectedType = "Generalized";
                       });
-                      print(selectedType);
                     },
                     textstyle: selectedType == "Generalized"
                         ? kNewEntryTextStyleActive
@@ -104,7 +102,6 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       setState(() {
                         selectedType = "Other";
                       });
-                      print(selectedType);
                     },
                     textstyle: selectedType == "Other"
                         ? kNewEntryTextStyleActive
@@ -181,10 +178,10 @@ class _NewEntryPageState extends State<NewEntryPage> {
               ),
               EntryButton(
                 text: 'Save',
-                onPress: () {
-                  print(DateTime.now().toString());
+                onPress: () async {
                   Seizure entry = Seizure(date: date_time,type: selectedType,length: length,feel: feel,note: note); 
                   DatabaseService.db.createSeize(entry);
+                  print(await DatabaseService.db.getAllSeizures());
                   Navigator.pop(context);
                 },
               ),
