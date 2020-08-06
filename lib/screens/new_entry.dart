@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:path/path.dart'; 
+import 'package:sqflite/sqflite.dart';
+import 'package:track_seizure/component/database/db.dart';
+
+
+import 'package:track_seizure/component/seizure_data.dart';
+import 'package:track_seizure/component/header.dart';
 import 'package:track_seizure/component/constants.dart';
 import 'package:track_seizure/component/entryComponents.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:track_seizure/component/seizure_data.dart'; 
 
 
 class NewEntryPage extends StatefulWidget {
@@ -13,6 +19,7 @@ class NewEntryPage extends StatefulWidget {
 }
 
 class _NewEntryPageState extends State<NewEntryPage> {
+  DatabaseService dbService = DatabaseService();
   TextEditingController nameController = TextEditingController();
   Type selectedType;
   int length = 60;
@@ -26,24 +33,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              ClipPath(
-                  clipper: ClipperEntry(),
-                  child: Container(
-                    width: double.infinity,
-                    height: 200.0,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomRight,
-                            end: Alignment.topLeft,
-                            colors: [
-                          kBottomGradientColor,
-                          kTopGradientColor,
-                        ])),
-                    child: Image.asset(
-                      'assets/images/stay.png',
-                      width: 100,
-                    ),
-                  )),
+              EntryHeader(),
               Text(
                 'Which type of seizure ?',
                 style: trackHeaderStyle,
@@ -165,6 +155,8 @@ class _NewEntryPageState extends State<NewEntryPage> {
               EntryButton(
                 text: 'Save',
                 onPress: () {
+                  Seizure entry = Seizure(date: DateTime.now(),type: selectedType,length: length,feel: feel,note: note); 
+                  dbService.createSeize(entry);
                   Navigator.pop(context);
                 },
               ),
@@ -174,30 +166,4 @@ class _NewEntryPageState extends State<NewEntryPage> {
   }
 }
 
-class ClipperEntry extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = new Path();
-    path.lineTo(0.0, size.height - 20);
 
-    var firstControlPoint = Offset(size.width / 4, size.height);
-    var firstEndPoint = Offset(size.width / 2.25, size.height - 30.0);
-    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-        firstEndPoint.dx, firstEndPoint.dy);
-
-    var secondControlPoint =
-        Offset(size.width - (size.width / 3.25), size.height - 65);
-    var secondEndPoint = Offset(size.width, size.height - 40);
-    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-        secondEndPoint.dx, secondEndPoint.dy);
-
-    path.lineTo(size.width, size.height - 40);
-    path.lineTo(size.width, 0.0);
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
