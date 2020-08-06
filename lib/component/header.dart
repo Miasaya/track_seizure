@@ -134,27 +134,22 @@ class LogHeader extends StatelessWidget {
       clipper: LogTrackClipper(),
       child: Container(
           width: double.infinity,
-          height: 120.0,
+          height: 500,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
-                colors: [
-              kBottomGradientColor,
-              kTopGradientColor,
-            ]),
-          ),
-          child: Column(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                  colors: [
+                kBottomGradientColor,
+                kTopGradientColor,
+              ])),
+          child: Stack(
             children: <Widget>[
-              Expanded(
-                child: Stack(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
-                    child: Text('Recent Entries', style : kHeaderTextStyle),
-                  ),   
-                ],
-              )),
+              Positioned(
+                top: 17,
+                left: 30,
+                child: Text('Recent Entries:', style : kHeaderLogTextStyle)
+                ),
             ],
           )),
     );

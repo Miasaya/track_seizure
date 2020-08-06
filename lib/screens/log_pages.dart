@@ -29,18 +29,17 @@ class _LogPageState extends State<LogPage> {
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
+                      borderRadius: BorderRadius.only(topRight : Radius.circular(40.0),topLeft: Radius.circular(40.0))
                       ),
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(), 
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index){
                         Seizure elem = snapshot.data[index]; 
-                        return Card(
-                          child: ListTile(
-                            title: Text(elem.date, style:  trackHeaderStyle ),
-                            subtitle: Text(elem.type, style : kEntryDate),
-                            trailing: Icon(Feather.chevron_right),
-                          ),
+                        return ListTile(
+                          title: Text(elem.date, style:  kLogDateStyle ),
+                          subtitle: Text(elem.type, style : kLogTypeStyle),
+                          trailing: Icon(Feather.chevron_right),
                         );
                       },
                     ),
