@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:track_seizure/component/constants.dart';
 import 'package:track_seizure/component/entryComponents.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:track_seizure/component/seizure_data.dart'; 
 
-enum Type { absence, tc, other }
 
 class NewEntryPage extends StatefulWidget {
   NewEntryPage({Key key}) : super(key: key);
@@ -15,7 +15,7 @@ class NewEntryPage extends StatefulWidget {
 class _NewEntryPageState extends State<NewEntryPage> {
   TextEditingController nameController = TextEditingController();
   Type selectedType;
-  int lenght = 60;
+  int length = 60;
   int feel = 5;
   String note = "";
 
@@ -97,7 +97,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
               ),
               SizedBox(height: 15.0),
               Text(
-                'Lenght : $lenght sec',
+                'length : $length sec',
                 style: trackHeaderStyle,
               ),
               SliderTheme(
@@ -110,12 +110,12 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
                   ),
                   child: Slider(
-                      value: lenght.toDouble(),
+                      value: length.toDouble(),
                       min: 10.0,
                       max: 120.0,
                       onChanged: (double newValue) {
                         setState(() {
-                          lenght = newValue.round();
+                          length = newValue.round();
                         });
                       })),
               SizedBox(height: 15.0),
