@@ -33,33 +33,33 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    backgroundColor: Colors.white,
-    bottomNavigationBar: BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(FontAwesome.home),
-          title: Text('Home'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(FontAwesome.align_justify),
-          title: Text('Log'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(FontAwesome.bar_chart),
-          title: Text('Statistics'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(FontAwesome.cog),
-          title: Text('Settings'),
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: Color(0xFF804CD9),
-      unselectedItemColor: Colors.grey[400],
-      backgroundColor: Colors.white70,
-      onTap: _onItemTapped,
-    ),
-    body: screenBuilder[_selectedIndex],
-    );
+      backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Feather.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Feather.align_justify),
+            title: Text('Log'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Feather.bar_chart),
+            title: Text('Statistics'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Feather.settings),
+            title: Text('Settings'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Color(0xFF804CD9),
+        unselectedItemColor: Colors.grey[400],
+        backgroundColor: Colors.white70,
+        onTap: _onItemTapped,
+      ),
+      body: screenBuilder[_selectedIndex],
+      );
   }
 }

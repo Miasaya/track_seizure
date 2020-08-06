@@ -60,12 +60,12 @@ class EntryOption extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        width: 100.0,
+        width: 90.0,
         height: 80.0,
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(5.0),
               child: Icon(
                 icon,
                 color: Colors.white,

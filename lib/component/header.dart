@@ -122,3 +122,60 @@ class ClipperEntry extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
+
+class LogHeader extends StatelessWidget {
+  const LogHeader({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipPath(
+      clipper: LogTrackClipper(),
+      child: Container(
+          width: double.infinity,
+          height: 120.0,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomRight,
+                end: Alignment.topLeft,
+                colors: [
+              kBottomGradientColor,
+              kTopGradientColor,
+            ]),
+          ),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Text('Recent Entries', style : kHeaderTextStyle),
+                  ),   
+                ],
+              )),
+            ],
+          )),
+    );
+  }
+}
+
+class LogTrackClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height - 80);
+    path.quadraticBezierTo(
+        size.width / 2, size.height, size.width, size.height - 90);
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
+}
