@@ -134,7 +134,7 @@ class LogHeader extends StatelessWidget {
       clipper: LogTrackClipper(),
       child: Container(
           width: double.infinity,
-          height: 500,
+          height: 200,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.bottomRight,

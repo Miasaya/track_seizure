@@ -53,7 +53,7 @@ const Color kTopGradientColor = Color(0xFF804CD9);
 
 
 // Log constants // 
-const Color kLogListShadow = Color(0x28554BD8);
+const Color kLogListShadow = Color(0x14554BD8);
 const TextStyle kLogDateStyle = TextStyle(
   fontSize: 23, 
   fontWeight: FontWeight.bold,
