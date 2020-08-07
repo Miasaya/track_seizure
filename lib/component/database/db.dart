@@ -38,7 +38,7 @@ class DatabaseService{
     await db.update('seizures', seizure.toMap(),where: "date = ?",whereArgs: [seizure.date]);
   }
 
-  deleteSeize(DateTime date) async {
+  deleteSeize(String date) async {
     final Database db = await database; 
     await db.delete('seizures', where: "date = ?",whereArgs: [date]);
   }

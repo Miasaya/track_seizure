@@ -74,7 +74,7 @@ class BottomSheetContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250, 
+      height: 270, 
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -84,11 +84,17 @@ class BottomSheetContainer extends StatelessWidget {
         ]
         ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 25,right: 25,top: 10),
+        padding: const EdgeInsets.only(left: 25,right: 25,),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children : [
+            Center(
+              child: IconButton(
+                icon: Icon(Feather.chevron_up),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
             Text("Summary of the seizure: ", style:  kLogDateStyle ),
             SizedBox(height: 14,),
             Text("TIME: " + entry.date, style:  kLogTypeStyle ),
@@ -96,15 +102,22 @@ class BottomSheetContainer extends StatelessWidget {
             Text("LENGTH: " + entry.length.toString() +" sec",style:kLogTypeStyle),
             Text("INTENSITY: " + entry.feel.toString() +" /10",style:kLogTypeStyle),
             Text("NOTES: " + entry.note ,style:kLogTypeStyle),
+            SizedBox(height: 14,),
             Center(
               child: RaisedButton(
                 onPressed: (){
+                  DatabaseService.db.deleteSeize(entry.date);
+                  Navigator.pop(context);
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
                 ),
                 color: Colors.red[400],
-                child: Icon(Feather.trash,color: Colors.white,),
+                child: Container(
+                  height: 42,
+                  width: 150,
+                  child: Icon(Feather.trash,color: Colors.white,)
+                  ),
               ),
             )
             ]
