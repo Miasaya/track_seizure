@@ -56,7 +56,12 @@ class _LogPageState extends State<LogPage> {
           );
         } else {
           return Center(
-            child: Text("There's no entry yet.", style: trackHeaderStyle,) 
+            child: Column(
+              children: [
+                Image.asset("assets/images/404.jpg"),
+                Text("There's no entry yet.", style: trackHeaderStyle,),
+              ],
+            ) 
             );
         }
       }
