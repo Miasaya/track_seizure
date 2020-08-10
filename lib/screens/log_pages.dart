@@ -13,6 +13,7 @@ class LogPage extends StatefulWidget {
 }
 
 class _LogPageState extends State<LogPage> {
+   
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Seizure>>(
@@ -21,7 +22,7 @@ class _LogPageState extends State<LogPage> {
         if (snapshot.hasData){
           return Stack(
             children: [
-              LogHeader(),
+              LogHeader(text: "Recent Entries"),
               DraggableScrollableSheet(
                 initialChildSize: 0.90,
                 maxChildSize: 0.90,
@@ -40,7 +41,7 @@ class _LogPageState extends State<LogPage> {
                           title: Text(elem.date, style:  kLogDateStyle ),
                           subtitle: Text(elem.type, style : kLogTypeStyle),
                           trailing: Icon(Feather.chevron_right),
-                          onTap: () {
+                          onLongPress: () {
                             showBottomSheet(
                               context: context, 
                               builder: (context) => BottomSheetContainer(entry: elem,) //TODO: Change the style to make it more friendly
@@ -59,7 +60,7 @@ class _LogPageState extends State<LogPage> {
             child: Column(
               children: [
                 Image.asset("assets/images/404.jpg"),
-                Text("There's no entry yet.", style: trackHeaderStyle,),
+                Text("There's no entries yet.", style: trackHeaderStyle,),
               ],
             ) 
             );

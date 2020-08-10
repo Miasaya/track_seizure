@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 
 enum Type { absence, tc, other }
 
@@ -36,4 +37,27 @@ class Seizure {
         "Feel": feel,
         "Note": note,
     };
+}
+
+List getPercentageType (snapshot){
+  int aType = 0; 
+  int gType = 0;
+  int oType = 0; 
+
+  List typeList = List(); 
+  snapshot.forEach((element) {typeList.add(element.type);});
+
+  typeList.forEach((element) {
+    if (element== 'Absence'){
+      aType ++;
+    } else if (element == 'Generalized'){
+      gType ++;
+    } else {
+      oType ++;
+    }
+   });
+
+  return ([aType/typeList.length,gType/typeList.length,oType/typeList.length]);
+
+
 }

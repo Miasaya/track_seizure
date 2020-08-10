@@ -124,9 +124,8 @@ class ClipperEntry extends CustomClipper<Path> {
 }
 
 class LogHeader extends StatelessWidget {
-  const LogHeader({
-    Key key,
-  }) : super(key: key);
+  final String text; 
+  LogHeader({this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +147,7 @@ class LogHeader extends StatelessWidget {
               Positioned(
                 top: 17,
                 left: 30,
-                child: Text('Recent Entries:', style : kHeaderLogTextStyle)
+                child: Text(text, style : kHeaderLogTextStyle)
                 ),
             ],
           )),
