@@ -5,6 +5,7 @@ import 'package:track_seizure/component/constants.dart';
 import 'package:track_seizure/component/database/db.dart';
 import 'package:track_seizure/component/header.dart';
 import 'package:track_seizure/component/seizure_data.dart';
+import 'package:track_seizure/component/Log_StatsComponents.dart';
 
 class StatsPage extends StatefulWidget {
   StatsPage({Key key}) : super(key: key);
@@ -15,11 +16,11 @@ class StatsPage extends StatefulWidget {
 
 class _StatsPageState extends State<StatsPage> {
   int touchedIndex;
-
-  List<PieChartSectionData> _showingSections(AsyncSnapshot<List<Seizure>> snapshot) {
+  List<Seizure> snapshotList;
+  List<PieChartSectionData> _showingSections(List<Seizure> snapshot) {
     List percentage = getPercentageType(snapshot);
-
-    return List.generate(4, (i) {
+    
+    return List.generate(3, (i) {
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 25 : 16;
       final double radius = isTouched ? 60 : 50;
@@ -62,6 +63,7 @@ class _StatsPageState extends State<StatsPage> {
         future: DatabaseService.db.getAllSeizures(),
         builder: (BuildContext context, AsyncSnapshot<List<Seizure>> snapshot) {
           if (snapshot.hasData) {
+            snapshotList = snapshot.data;
             return Stack(children: [
               LogHeader(text: "Statistics"),
               DraggableScrollableSheet(
@@ -94,7 +96,7 @@ class _StatsPageState extends State<StatsPage> {
                               ),
                               sectionsSpace: 0,
                               centerSpaceRadius: 40,
-                              sections: _showingSections(snapshot))
+                              sections: _showingSections(snapshotList))
                           )
                         ]
                       ),
@@ -102,18 +104,10 @@ class _StatsPageState extends State<StatsPage> {
                   })
             ]);
           } else {
-            return Center(
-              child: Column(
-                children: [
-                  Image.asset("assets/images/404.jpg"),
-                  Text(
-                    "There's no entries yet.",
-                    style: trackHeaderStyle,
-                  ),
-                ],
-              ),
-            );
+            return NoDataWidget();
           }
         });
   }
 }
+
+

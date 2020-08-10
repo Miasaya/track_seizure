@@ -39,7 +39,7 @@ class Seizure {
     };
 }
 
-List getPercentageType (snapshot){
+List getPercentageType (List<Seizure> snapshot){
   int aType = 0; 
   int gType = 0;
   int oType = 0; 
@@ -57,7 +57,6 @@ List getPercentageType (snapshot){
     }
    });
 
-  return ([aType/typeList.length,gType/typeList.length,oType/typeList.length]);
-
+  return ([(aType*100/typeList.length).roundToDouble(),(gType*100/typeList.length).roundToDouble(),(oType*100/typeList.length).roundToDouble()]);
 
 }
