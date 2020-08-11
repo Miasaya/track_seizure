@@ -47,9 +47,16 @@ const TextStyle kEntryDate= TextStyle(
   fontFamily: 'Open',
   color: Color(0xFF707070),
   );
+
 const Color kBottomGradientColor = Color(0xFF554BD8);
 
 const Color kTopGradientColor = Color(0xFF804CD9);
+
+Color kAbsenceColor = Colors.orange[300];
+
+Color kGeneralizedColor = Colors.red[400];
+
+Color kOtherColor = Colors.green[400];
 
 
 // Log constants // 

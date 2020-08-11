@@ -17,17 +17,18 @@ class StatsPage extends StatefulWidget {
 class _StatsPageState extends State<StatsPage> {
   int touchedIndex;
   List<Seizure> snapshotList;
+
   List<PieChartSectionData> _showingSections(List<Seizure> snapshot) {
     List percentage = getPercentageType(snapshot);
     
     return List.generate(3, (i) {
       final isTouched = i == touchedIndex;
-      final double fontSize = isTouched ? 25 : 16;
-      final double radius = isTouched ? 60 : 50;
+      final double fontSize = isTouched ? 20 : 15;
+      final double radius = isTouched ? 60 : 60;
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: const Color(0xff0293ee),
+            color: kAbsenceColor,
             value: percentage[0],
             title: "${percentage[0]}%",
             radius: radius,
@@ -36,7 +37,7 @@ class _StatsPageState extends State<StatsPage> {
           );
         case 1:
           return PieChartSectionData(
-            color: const Color(0xfff8b250),
+            color: kGeneralizedColor,
             value: percentage[1],
             title: "${percentage[1]}%",
             radius: radius,
@@ -45,7 +46,7 @@ class _StatsPageState extends State<StatsPage> {
           );
         case 2:
           return PieChartSectionData(
-            color: const Color(0xff845bef),
+            color: kOtherColor,
             value: percentage[2],
             title: "${percentage[2]}%",
             radius: radius,
@@ -56,6 +57,28 @@ class _StatsPageState extends State<StatsPage> {
           return null;
       }
     });
+  }
+
+  PieChart buildPieChart() {
+    return PieChart(
+      PieChartData(
+        pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
+          setState(() {
+            if (pieTouchResponse.touchInput is FlLongPressEnd ||
+                pieTouchResponse.touchInput is FlPanEnd) {
+              touchedIndex = -1;
+            } else {
+              touchedIndex = pieTouchResponse.touchedSectionIndex;
+            }
+          });
+        }),
+        borderData: FlBorderData(
+          show: false,
+        ),
+        sectionsSpace: 0,
+        centerSpaceRadius: 40,
+        sections: _showingSections(snapshotList))
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -71,33 +94,31 @@ class _StatsPageState extends State<StatsPage> {
                   maxChildSize: 0.90,
                   builder: (context, scrollController) {
                     return Container(
+                      padding: EdgeInsets.only(right:15.0,top:10.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(40.0),
                             topLeft: Radius.circular(40.0))),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children :[
-                          Text("Summary :", style: trackHeaderStyle),
-                          PieChart(
-                            PieChartData(
-                              pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
-                                setState(() {
-                                  if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                                      pieTouchResponse.touchInput is FlPanEnd) {
-                                    touchedIndex = -1;
-                                  } else {
-                                    touchedIndex = pieTouchResponse.touchedSectionIndex;
-                                  }
-                                });
-                              }),
-                              borderData: FlBorderData(
-                                show: false,
-                              ),
-                              sectionsSpace: 0,
-                              centerSpaceRadius: 40,
-                              sections: _showingSections(snapshotList))
-                          )
+                          Padding(
+                            padding: const EdgeInsets.only(left:15.0),
+                            child: Text("Type :", style: trackHeaderStyle),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              buildPieChart(),
+                              PieChartTypeLabel(),                              
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left:15.0),
+                            child: Text("Monthly Chart :", style: trackHeaderStyle),
+                          ),
+                          
                         ]
                       ),
                     );
@@ -109,5 +130,7 @@ class _StatsPageState extends State<StatsPage> {
         });
   }
 }
+
+
 
 

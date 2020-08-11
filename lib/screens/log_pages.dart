@@ -42,7 +42,7 @@ class _LogPageState extends State<LogPage> {
                           title: Text(elem.date, style:  kLogDateStyle ),
                           subtitle: Text(elem.type, style : kLogTypeStyle),
                           trailing: Icon(Feather.chevron_right),
-                          onLongPress: () {
+                          onTap: () {
                             showBottomSheet(
                               context: context, 
                               builder: (context) => BottomSheetContainer(entry: elem,) //TODO: Change the style to make it more friendly

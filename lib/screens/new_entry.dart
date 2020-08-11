@@ -75,7 +75,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       EntryOption(
-                        colour: Colors.orange[300],
+                        colour: kAbsenceColor,
                         text: 'Absence',
                         icon: FontAwesome.eye,
                         onPress: () {
@@ -88,7 +88,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                             : kNewEntryTextStyleInactive,
                       ),
                       EntryOption(
-                        colour: Colors.red[400],
+                        colour: kGeneralizedColor,
                         text: 'Generalized',
                         icon: FontAwesome.male,
                         onPress: () {
@@ -101,7 +101,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                             : kNewEntryTextStyleInactive,
                       ),
                       EntryOption(
-                        colour: Colors.green[400],
+                        colour: kOtherColor,
                         text: 'Other',
                         icon: FontAwesome.question,
                         onPress: () {
