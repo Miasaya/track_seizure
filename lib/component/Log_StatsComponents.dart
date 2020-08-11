@@ -3,6 +3,7 @@ import 'seizure_data.dart';
 import 'constants.dart';
 import 'database/db.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 
 class BottomSheetContainer extends StatelessWidget {
@@ -166,3 +167,16 @@ class PieChartTypeLabel extends StatelessWidget {
     );
   }
 }
+
+BarChartGroupData makeGroupData(int x, int y1, int y2, int y3) {
+    return BarChartGroupData(barsSpace: 4, x: x, barRods: [
+      BarChartRodData(
+        y: (y1+y2+y3).toDouble(),
+        width: 15,
+        rodStackItems: [
+          BarChartRodStackItem(0, y1.toDouble(), kAbsenceColor),
+          BarChartRodStackItem(y1.toDouble(), (y1+y2).toDouble(), kGeneralizedColor),
+          BarChartRodStackItem((y1+y2).toDouble(), (y1+y2+y3).toDouble(), kOtherColor),]
+      ),
+    ]);
+  }

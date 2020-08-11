@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:async';
 
 enum Type { absence, tc, other }
 
@@ -58,5 +57,30 @@ List getPercentageType (List<Seizure> snapshot){
    });
 
   return ([(aType*100/typeList.length).roundToDouble(),(gType*100/typeList.length).roundToDouble(),(oType*100/typeList.length).roundToDouble()]);
+
+}
+
+List getNumberEntries (List<Seizure> snapshot,String month){
+  int aType = 0; 
+  int gType = 0;
+  int oType = 0; 
+
+  List snapshotCopy;
+  List typeList = List(); 
+  snapshotCopy = snapshot.where((element) => ((element.date).substring(3,5)==month)).toList();
+
+  snapshotCopy.forEach((element) =>(typeList.add(element.type)));
+  print(snapshotCopy);
+  typeList.forEach((element) {
+    if (element== 'Absence'){
+      aType ++;
+    } else if (element == 'Generalized'){
+      gType ++;
+    } else {
+      oType ++;
+    }
+   });
+
+  return([aType,gType,oType]);
 
 }
