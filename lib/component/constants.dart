@@ -81,3 +81,19 @@ const TextStyle kHeaderLogTextStyle = TextStyle(
   fontFamily: 'Open',
   color: Colors.white,
   );
+
+// Settings contents //
+const kSettingsTitle = TextStyle(
+  fontSize: 20, 
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Open',
+  color: Color(0xFF707070),
+  );
+
+
+const TextStyle kWarningStyle = TextStyle(
+  fontSize: 17, 
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Open',
+  color: Color(0xFF707070),
+  );

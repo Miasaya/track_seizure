@@ -15,7 +15,7 @@ class NewEntryPage extends StatefulWidget {
   NewEntryPage({this.seizeEntry});
 
   @override
-  _NewEntryPageState createState() => _NewEntryPageState();
+  _NewEntryPageState createState() => _NewEntryPageState(seizeEntry: seizeEntry);
 }
 
 class _NewEntryPageState extends State<NewEntryPage> {
@@ -28,13 +28,16 @@ class _NewEntryPageState extends State<NewEntryPage> {
   int length = 60;
   int feel = 5;
   String note = "";
-  String dateTime;
+  String dateTime = (DateFormat('dd-MM-yy – kk:mm').format(DateTime.now()));
   String status = "new";
   @override
   void initState() {
     if (seizeEntry != null){
       status = "edit"; 
       dateTime = seizeEntry.date;
+      feel = seizeEntry.feel; 
+      note = seizeEntry.note; 
+      length = seizeEntry.length;
     }
     super.initState();
   }

@@ -42,6 +42,12 @@ class DatabaseService{
     final Database db = await database; 
     await db.delete('seizures', where: "date = ?",whereArgs: [date]);
   }
+
+  deleteAll() async {
+    final Database db = await database; 
+    await db.close();
+  }
+  
   
   Future<List<Seizure>> getAllSeizures() async {
     final db = await database;

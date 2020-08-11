@@ -4,6 +4,7 @@ import 'constants.dart';
 import 'database/db.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:track_seizure/screens/new_entry.dart';
 
 
 class BottomSheetContainer extends StatelessWidget {
@@ -46,20 +47,41 @@ class BottomSheetContainer extends StatelessWidget {
             Text("NOTES: " + entry.note ,style:kLogTypeStyle),
             SizedBox(height: 14,),
             Center(
-              child: RaisedButton(
-                onPressed: (){
-                  DatabaseService.db.deleteSeize(entry.date);
-                  Navigator.pop(context);
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                color: Colors.red[400],
-                child: Container(
-                  height: 42,
-                  width: 150,
-                  child: Icon(Feather.trash,color: Colors.white,)
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    onPressed: (){
+                      DatabaseService.db.deleteSeize(entry.date);
+                      Navigator.pop(context);
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: Colors.red[400],
+                    child: Container(
+                      height: 42,
+                      width: 100,
+                      child: Icon(Feather.trash,color: Colors.white,)
+                      ),
                   ),
+                  RaisedButton(
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return NewEntryPage(seizeEntry: entry,);
+                      }));
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: kTopGradientColor,
+                    child: Container(
+                      height: 42,
+                      width: 100,
+                      child: Icon(Feather.edit_2,color: Colors.white,)
+                      ),
+                  ),
+                ],
               ),
             )
             ]
