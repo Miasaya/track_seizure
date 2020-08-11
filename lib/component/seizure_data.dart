@@ -70,7 +70,6 @@ List getNumberEntries (List<Seizure> snapshot,String month){
   snapshotCopy = snapshot.where((element) => ((element.date).substring(3,5)==month)).toList();
 
   snapshotCopy.forEach((element) =>(typeList.add(element.type)));
-  print(snapshotCopy);
   typeList.forEach((element) {
     if (element== 'Absence'){
       aType ++;

@@ -46,15 +46,18 @@ class DatabaseService{
   Future<List<Seizure>> getAllSeizures() async {
     final db = await database;
     var response = await db.query("seizures"); 
-    return List.generate(response.length, (i) {
-    return Seizure(
-      date: response[i]['date'],
-      type: response[i]['type'],
-      length: response[i]['length'],
-      feel: response[i]['feel'],
-      note: response[i]['note']
+    List<Seizure> listOfAll = List.generate(response.length, (i) {
+      return Seizure(
+        date: response[i]['date'],
+        type: response[i]['type'],
+        length: response[i]['length'],
+        feel: response[i]['feel'],
+        note: response[i]['note']
+      );
+    }
     );
-  });
+    listOfAll.sort((a,b) => (a.date).compareTo(b.date));
+    return (listOfAll);
   }
 
 }

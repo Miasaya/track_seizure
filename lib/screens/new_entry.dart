@@ -11,20 +11,33 @@ import 'package:track_seizure/component/entryComponents.dart';
 
 
 class NewEntryPage extends StatefulWidget {
-  NewEntryPage({Key key}) : super(key: key);
+  Seizure seizeEntry;
+  NewEntryPage({this.seizeEntry});
 
   @override
   _NewEntryPageState createState() => _NewEntryPageState();
 }
 
 class _NewEntryPageState extends State<NewEntryPage> {
+  Seizure seizeEntry;
+  _NewEntryPageState({this.seizeEntry});
+
+
   TextEditingController nameController = TextEditingController();
   String selectedType = "";
   int length = 60;
   int feel = 5;
   String note = "";
-  String date_time = DateFormat('dd-MM-yy – kk:mm').format(DateTime.now());
-
+  String dateTime;
+  String status = "new";
+  @override
+  void initState() {
+    if (seizeEntry != null){
+      status = "edit"; 
+      dateTime = seizeEntry.date;
+    }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,21 +62,23 @@ class _NewEntryPageState extends State<NewEntryPage> {
                       ),
                       FlatButton(
                         onPressed: () {
-                          DatePicker.showDateTimePicker(context,
-                            showTitleActions: true,
-                            minTime: DateTime(2018, 3, 5),
-                            maxTime: DateTime.now(), 
-                            onConfirm: (date) {
-                              setState(() {
-                                date_time = (DateFormat('dd-MM-yy – kk:mm').format(date)).toString();
-                              });
-                              print(date_time);
-                            }, 
-                            currentTime: DateTime.now(), 
-                            locale: LocaleType.en
-                            );
+                          if (status=="new"){
+                            DatePicker.showDateTimePicker(context,
+                              showTitleActions: true,
+                              minTime: DateTime(2018, 3, 5),
+                              maxTime: DateTime.now(), 
+                              onConfirm: (date) {
+                                setState(() {
+                                  dateTime = (DateFormat('dd-MM-yy – kk:mm').format(date)).toString();
+                                });
+                                print(dateTime);
+                              }, 
+                              currentTime: DateTime.now(), 
+                              locale: LocaleType.en
+                              );
+                          }
                           },
-                        child: Text(date_time, style: kEntryDate),
+                        child: Text(dateTime, style: kEntryDate),
                         ),
                     ],
                   ),
@@ -186,8 +201,12 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     child: EntryButton(
                       text: 'Save',
                       onPress: () async {
-                        Seizure entry = Seizure(date: date_time,type: selectedType,length: length,feel: feel,note: note); 
-                        DatabaseService.db.createSeize(entry);
+                        Seizure entry = Seizure(date: dateTime,type: selectedType,length: length,feel: feel,note: note); 
+                        if (status=="new"){
+                          DatabaseService.db.createSeize(entry);
+                        } else if (status=="edit"){
+                          DatabaseService.db.updateSeize(entry);
+                        }
                         Navigator.pop(context);
                       },
                     ),
