@@ -4,6 +4,7 @@ import 'package:track_seizure/component/seizure_data.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:intl/intl.dart';
 
 class DatabaseService{
   DatabaseService._();
@@ -45,11 +46,12 @@ class DatabaseService{
 
   deleteAll() async {
     final Database db = await database; 
-    await db.close();
+    await db.delete('seizures');
   }
   
   
   Future<List<Seizure>> getAllSeizures() async {
+    DateFormat format = DateFormat("dd-MM-yy – kk:mm");
     final db = await database;
     var response = await db.query("seizures"); 
     List<Seizure> listOfAll = List.generate(response.length, (i) {
@@ -62,7 +64,7 @@ class DatabaseService{
       );
     }
     );
-    listOfAll.sort((a,b) => (a.date).compareTo(b.date));
+    listOfAll.sort((a,b) => ((format.parse(b.date)).compareTo((format.parse(a.date)))));
     return (listOfAll);
   }
 
