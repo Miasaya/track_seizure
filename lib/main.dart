@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:track_seizure/component/localNotifications.dart';
 import 'screens/home.dart';
-
 
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  Notifications();
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   runApp(MyApp());
   }

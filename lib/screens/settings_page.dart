@@ -3,7 +3,7 @@ import 'package:track_seizure/component/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:track_seizure/component/database/db.dart';
 import 'package:track_seizure/component/header.dart';
-import 'package:track_seizure/component/seizure_data.dart';
+import 'package:track_seizure/component/localNotifications.dart';
 import 'package:track_seizure/component/Log_StatsComponents.dart';
 
 class SettingPage extends StatefulWidget {
@@ -14,7 +14,49 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  int _selectedOption = 0;
+  Notifications notification;
+  int minNotification = 0;
+  int hourNotification = 22;
+  List settings;
+  @override
+  void initState() { 
+    super.initState();
+    settings = [
+      Settings(
+        icon: Icon(Feather.bell, size: 25),
+        title: 'Manage Notifications',
+        subtitle: 'Current time : ${minNotification.toString()}-${hourNotification.toString()}',
+        warningText: "Bla bla bla",
+        showTimePick: true,
+        onPress: (){
+          notification.removeReminder(1);
+          notification.showNotificationDaily(1, 'Does anything happened today?', 'Tap here to track', hourNotification,  minNotification);
+        }),
+      Settings(
+        icon: Icon(Feather.upload, size: 25),
+        title: 'Export Data',
+        subtitle: 'Export the database to a .csv file',
+        showTimePick: false,
+      ),
+      Settings(
+        icon: Icon(Feather.download, size: 25),
+        title: 'Import Data',
+        subtitle: 'Import a database from a .csv file',
+        showTimePick: false,
+      ),
+      Settings(
+          icon: Icon(Feather.trash, size: 25),
+          title: 'Erase Data',
+          subtitle: 'Clear the database',
+          warningText: "This will erase all your data, proceed ?",
+          showTimePick: false,
+          onPress: () {
+            DatabaseService.db.deleteAll();
+            }),
+    ];
+    notification.showNotificationDaily(1, 'Does anything happened today?', 'Tap here to track', hourNotification,  minNotification);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -44,6 +86,7 @@ class _SettingPageState extends State<SettingPage> {
                             builder: (context) => BottomSheetSettingsContainer(
                                   warningText: settings[index].warningText,
                                   onPress: settings[index].onPress,
+                                  showTimePick: settings[index].showTimePick,
                                 ));
                       },
                     );
@@ -60,43 +103,29 @@ class Settings {
   String subtitle;
   String warningText;
   Function onPress;
+  bool showTimePick; 
   Settings(
-      {this.icon, this.title, this.subtitle, this.warningText, this.onPress});
+      {this.icon, this.title, this.subtitle, this.warningText, this.onPress, @required this.showTimePick});
 }
 
-final settings = [
-  Settings(
-      icon: Icon(Feather.bell, size: 25),
-      title: 'Manage Notifications',
-      subtitle: 'Choose when the daily reminder pop up',
-      warningText: "Bla bla bla",
-      onPress: null),
-  Settings(
-    icon: Icon(Feather.upload, size: 25),
-    title: 'Export Data',
-    subtitle: 'Export the database to a .csv file',
-  ),
-  Settings(
-    icon: Icon(Feather.download, size: 25),
-    title: 'Import Data',
-    subtitle: 'Import a database from a .csv file',
-  ),
-  Settings(
-      icon: Icon(Feather.trash, size: 25),
-      title: 'Erase Data',
-      subtitle: 'Clear the database',
-      warningText: "This will erase all your data, proceed ?",
-      onPress: () {
-        DatabaseService.db.deleteAll();
-        }),
-];
 
 class BottomSheetSettingsContainer extends StatelessWidget {
-  BottomSheetSettingsContainer({this.onPress, this.warningText});
+  BottomSheetSettingsContainer({this.onPress, this.warningText,@required this.showTimePick});
 
   final Function onPress;
   final String warningText;
+  final bool showTimePick; 
 
+
+  Future<TimeOfDay> _selectTime(BuildContext context) {
+      final now = DateTime.now();
+
+      return showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+      );
+    }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -131,19 +160,41 @@ class BottomSheetSettingsContainer extends StatelessWidget {
               ),
               Text(warningText, style: kWarningStyle),
               SizedBox(height: 20,),
-              RaisedButton(
-                onPressed: onPress,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                color: Colors.red[400],
-                child: Container(
-                    height: 42,
-                    width: 160,
-                    child: Icon(
-                      Feather.check,
-                      color: Colors.white,
-                    )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RaisedButton(
+                    onPressed: () async {
+                      final selectedTime = await _selectTime(context);
+                      if (selectedTime == null) return;
+                      },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: kTopGradientColor,
+                    child: Container(
+                        height: 42,
+                        width: 160,
+                        child: Icon(
+                          Feather.check,
+                          color: Colors.white,
+                        )),
+                  ),
+                  RaisedButton(
+                    onPressed: onPress,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: Colors.red[400],
+                    child: Container(
+                        height: 42,
+                        width: 160,
+                        child: Icon(
+                          Feather.check,
+                          color: Colors.white,
+                        )),
+                  ),
+                ],
               ),
             ]),
       ),

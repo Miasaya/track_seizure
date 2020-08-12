@@ -8,13 +8,15 @@ import 'stats_pages.dart';
 import 'settings_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  final String payload;
+  HomePage({this.payload});
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  
 
   int _selectedIndex = 0;
 
