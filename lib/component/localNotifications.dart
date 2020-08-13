@@ -29,6 +29,7 @@ class Notifications {
   void showNotificationDaily(
     int id, String title, String body, int hour, int minute) async {
     var time = new Time(hour, minute, 0);
+    print(time);
     await flutterLocalNotificationsPlugin.showDailyAtTime(
         id, title, body, time, getPlatformChannelSpecfics());
     print('Notification Succesfully Scheduled at ${time.toString()}');

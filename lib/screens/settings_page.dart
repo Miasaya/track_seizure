@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:track_seizure/component/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:track_seizure/component/database/db.dart';
@@ -6,6 +7,8 @@ import 'package:track_seizure/component/header.dart';
 import 'package:track_seizure/component/localNotifications.dart';
 import 'package:track_seizure/component/Log_StatsComponents.dart';
 
+int minNotification = 00;
+int hourNotification = 22;
 class SettingPage extends StatefulWidget {
   SettingPage({Key key}) : super(key: key);
 
@@ -14,9 +17,7 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  Notifications notification;
-  int minNotification = 0;
-  int hourNotification = 22;
+  final Notifications notification = Notifications();
   List settings;
   @override
   void initState() { 
@@ -25,10 +26,13 @@ class _SettingPageState extends State<SettingPage> {
       Settings(
         icon: Icon(Feather.bell, size: 25),
         title: 'Manage Notifications',
-        subtitle: 'Current time : ${minNotification.toString()}-${hourNotification.toString()}',
-        warningText: "Bla bla bla",
+        subtitle: 'Current time : ${hourNotification.toString()}h ${minNotification.toString()}',
+        warningText: "Select desired time and tap on the check button",
         showTimePick: true,
         onPress: (){
+          setState(() {
+            
+          });
           notification.removeReminder(1);
           notification.showNotificationDaily(1, 'Does anything happened today?', 'Tap here to track', hourNotification,  minNotification);
         }),
@@ -54,7 +58,7 @@ class _SettingPageState extends State<SettingPage> {
             DatabaseService.db.deleteAll();
             }),
     ];
-    notification.showNotificationDaily(1, 'Does anything happened today?', 'Tap here to track', hourNotification,  minNotification);
+    notification.showNotificationDaily(0, 'Does anything happened today?', 'Tap here to track', hourNotification,  minNotification);
   }
 
   @override
@@ -82,12 +86,12 @@ class _SettingPageState extends State<SettingPage> {
                       trailing: settings[index].icon,
                       onTap: () {
                         showBottomSheet(
-                            context: context,
-                            builder: (context) => BottomSheetSettingsContainer(
-                                  warningText: settings[index].warningText,
-                                  onPress: settings[index].onPress,
-                                  showTimePick: settings[index].showTimePick,
-                                ));
+                          context: context,
+                          builder: (context) => BottomSheetSettingsContainer(
+                                warningText: settings[index].warningText,
+                                onPress: settings[index].onPress,
+                                showTimePick: settings[index].showTimePick,
+                              ));
                       },
                     );
                   },
@@ -110,22 +114,86 @@ class Settings {
 
 
 class BottomSheetSettingsContainer extends StatelessWidget {
-  BottomSheetSettingsContainer({this.onPress, this.warningText,@required this.showTimePick});
+  BottomSheetSettingsContainer({@required this.onPress, @required this.warningText,@required this.showTimePick});
 
   final Function onPress;
   final String warningText;
   final bool showTimePick; 
-
-
   Future<TimeOfDay> _selectTime(BuildContext context) {
-      final now = DateTime.now();
+    final now = DateTime.now();
 
-      return showTimePicker(
+    return showTimePicker(
         context: context,
         initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
       );
     }
-  
+
+  Widget buildButton(BuildContext wcontext, BuildContext tcontext){
+    Widget child; 
+    if (showTimePick){
+      child = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          RaisedButton(
+            onPressed: () async {
+              final selectedTime = await _selectTime(tcontext);
+              if (selectedTime == null) return;
+              else {
+                hourNotification = selectedTime.hour; 
+                minNotification = selectedTime.minute;
+              }
+              },
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            color: kTopGradientColor,
+            child: Container(
+                height: 42,
+                width: 100,
+                child: Icon(
+                  Feather.clock,
+                  color: Colors.white,
+                )),
+          ),
+          RaisedButton(
+            onPressed: onPress,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            color: Colors.red[400],
+            child: Container(
+                height: 42,
+                width: 100,
+                child: Icon(
+                  Feather.check,
+                  color: Colors.white,
+                )),
+          ),
+        ],
+      );
+    } else {
+      child = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          RaisedButton(
+            onPressed: onPress,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            color: Colors.red[400],
+            child: Container(
+                height: 42,
+                width: 160,
+                child: Icon(
+                  Feather.check,
+                  color: Colors.white,
+                )),
+          ),
+        ],
+      );
+    }
+    return child;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -160,43 +228,9 @@ class BottomSheetSettingsContainer extends StatelessWidget {
               ),
               Text(warningText, style: kWarningStyle),
               SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  RaisedButton(
-                    onPressed: () async {
-                      final selectedTime = await _selectTime(context);
-                      if (selectedTime == null) return;
-                      },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    color: kTopGradientColor,
-                    child: Container(
-                        height: 42,
-                        width: 160,
-                        child: Icon(
-                          Feather.check,
-                          color: Colors.white,
-                        )),
-                  ),
-                  RaisedButton(
-                    onPressed: onPress,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    color: Colors.red[400],
-                    child: Container(
-                        height: 42,
-                        width: 160,
-                        child: Icon(
-                          Feather.check,
-                          color: Colors.white,
-                        )),
-                  ),
-                ],
-              ),
+              buildButton(context,context),
             ]),
+          
       ),
     );
   }
