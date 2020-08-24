@@ -5,7 +5,9 @@ import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'csvConvert.dart';
+
 
 class DatabaseService{
   DatabaseService._();
@@ -70,15 +72,18 @@ class DatabaseService{
   }
 
   export() async {
-    final directory = await getApplicationDocumentsDirectory();
-    String path = directory.path;
-    List<Map<String,dynamic>> result;
+    String path = '/storage/emulated/0/Documents';
+    List<Map<String,dynamic>> result= [];
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
 
     print(path);
 
     var data = await db.getAllSeizures();
     for (int i = 0; i < data.length; i++){
-      result[i] = data[i].toMap();
+      result.add(data[i].toMap());
     }
     var csv = mapListToCsv(result);
 

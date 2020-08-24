@@ -5,7 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:track_seizure/component/database/db.dart';
 import 'package:track_seizure/component/header.dart';
 import 'package:track_seizure/component/localNotifications.dart';
-import 'package:track_seizure/component/Log_StatsComponents.dart';
+
 
 int minNotification = 00;
 int hourNotification = 22;
@@ -40,9 +40,10 @@ class _SettingPageState extends State<SettingPage> {
         icon: Icon(Feather.upload, size: 25),
         title: 'Export Data',
         subtitle: 'Export the database to a .csv file',
-        warningText: 'This will export your database to a csv file, proceed ?',
+        warningText: 'This will export your database to a .csv file in the Documents folder, proceed ?',
         showTimePick: false,
         onPress: (){
+          
           DatabaseService.db.export();
         }
       ),
