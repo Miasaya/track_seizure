@@ -22,13 +22,13 @@ const TextStyle kTrackingButton = TextStyle(
   );
 
 const TextStyle kNewEntryTextStyleInactive = TextStyle(
-  fontSize: 15, 
+  fontSize: 14, 
   fontFamily: 'April',
   color: Colors.white,
   );
 
 const TextStyle kNewEntryTextStyleActive = TextStyle(
-  fontSize: 17, 
+  fontSize: 16, 
   fontWeight: FontWeight.bold,
   fontFamily: 'April',
   color: Colors.white,

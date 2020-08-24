@@ -26,6 +26,11 @@ dependencies:
   flutter_svg: ^0.18.0
   fl_chart: ^0.11.0
   flutter_local_notifications: ^1.4.4+2
+  sqflite_porter:
+    git:
+      url: git://github.com/tekartik/sqflite_more
+      ref: dart2
+      path: sqflite_porter
 
 
 

@@ -40,7 +40,11 @@ class _SettingPageState extends State<SettingPage> {
         icon: Icon(Feather.upload, size: 25),
         title: 'Export Data',
         subtitle: 'Export the database to a .csv file',
+        warningText: 'This will export your database to a csv file, proceed ?',
         showTimePick: false,
+        onPress: (){
+          DatabaseService.db.export();
+        }
       ),
       Settings(
         icon: Icon(Feather.download, size: 25),
@@ -58,7 +62,6 @@ class _SettingPageState extends State<SettingPage> {
             DatabaseService.db.deleteAll();
             }),
     ];
-    notification.showNotificationDaily(0, 'Does anything happened today?', 'Tap here to track', hourNotification,  minNotification);
   }
 
   @override

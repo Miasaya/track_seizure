@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
+import 'csvConvert.dart';
 
 class DatabaseService{
   DatabaseService._();
@@ -68,6 +69,23 @@ class DatabaseService{
     return (listOfAll);
   }
 
+  export() async {
+    final directory = await getApplicationDocumentsDirectory();
+    String path = directory.path;
+    List<Map<String,dynamic>> result;
+
+    print(path);
+
+    var data = await db.getAllSeizures();
+    for (int i = 0; i < data.length; i++){
+      result[i] = data[i].toMap();
+    }
+    var csv = mapListToCsv(result);
+
+    File file = File('$path/ListOfSeizures.csv');
+    file.writeAsString(csv);
+  }
 }
+
 
 
