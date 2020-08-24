@@ -43,7 +43,6 @@ class _SettingPageState extends State<SettingPage> {
         warningText: 'This will export your database to a .csv file in the Documents folder, proceed ?',
         showTimePick: false,
         onPress: (){
-          
           DatabaseService.db.export();
         }
       ),
@@ -52,6 +51,10 @@ class _SettingPageState extends State<SettingPage> {
         title: 'Import Data',
         subtitle: 'Import a database from a .csv file',
         showTimePick: false,
+        warningText: 'Select a .csv file to be imported, \n WARNING : This will erase your current data',
+        onPress: (){
+          DatabaseService.db.import();
+        }
       ),
       Settings(
           icon: Icon(Feather.trash, size: 25),

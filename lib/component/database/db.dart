@@ -6,7 +6,9 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'csvConvert.dart';
+import 'FilesFunctions.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:csv/csv.dart';
 
 
 class DatabaseService{
@@ -89,6 +91,33 @@ class DatabaseService{
 
     File file = File('$path/ListOfSeizures.csv');
     file.writeAsString(csv);
+  }
+
+  import() async {
+    try {
+      File file = await FilePicker.getFile(
+        type: FileType.custom,
+        allowedExtensions:['csv'],
+      );
+      //Read the file 
+      String contents = await file.readAsString();
+      print(contents);
+      List<List<dynamic>> results = CsvToListConverter().convert(contents);
+      results.remove(0);
+
+      // Create the list of seizures
+      List<Seizure> allImported; 
+      for (int i = 0; i < results.length; i++){
+        Seizure s = Seizure.fromList(results[i]);  
+        allImported.add(s);
+      }
+      print(allImported);
+      return int.parse(contents);
+
+    } catch (e) {
+      // If we encounter an error, return 0
+      return e;
+    }
   }
 }
 
