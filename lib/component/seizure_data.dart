@@ -29,13 +29,6 @@ class Seizure {
         note: json["Note"],
     );
 
-    factory Seizure.fromList(List<String> list) => Seizure(
-        date: list[0],
-        type: list[1],
-        length: int.parse(list[2]),
-        feel: int.parse(list[3]),
-        note: list[4],
-    );
 
     Map<String, dynamic> toMap() => {
         "Date": date,
@@ -45,6 +38,7 @@ class Seizure {
         "Note": note,
     };
 }
+
 
 List getPercentageType (List<Seizure> snapshot){
   int aType = 0; 

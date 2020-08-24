@@ -31,7 +31,6 @@ class _SettingPageState extends State<SettingPage> {
         showTimePick: true,
         onPress: (){
           setState(() {
-            
           });
           notification.removeReminder(1);
           notification.showNotificationDaily(1, 'Does anything happened today?', 'Tap here to track', hourNotification,  minNotification);

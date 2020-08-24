@@ -101,18 +101,19 @@ class DatabaseService{
       );
       //Read the file 
       String contents = await file.readAsString();
-      print(contents);
       List<List<dynamic>> results = CsvToListConverter().convert(contents);
-      results.remove(0);
-
+      results.removeAt(0);
       // Create the list of seizures
-      List<Seizure> allImported; 
-      for (int i = 0; i < results.length; i++){
-        Seizure s = Seizure.fromList(results[i]);  
-        allImported.add(s);
+      db.deleteAll();
+      for (List elem in results) {
+        Seizure s = Seizure(
+          date: elem[0],
+          type: elem[1],
+          length: elem[2],
+          feel: elem[3],
+          note :elem[4]);  
+        db.createSeize(s);
       }
-      print(allImported);
-      return int.parse(contents);
 
     } catch (e) {
       // If we encounter an error, return 0
