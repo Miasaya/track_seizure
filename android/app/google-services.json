@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "638021154649",
+    "firebase_url": "https://trackit-drive.firebaseio.com",
+    "project_id": "trackit-drive",
+    "storage_bucket": "trackit-drive.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638021154649:android:76e239acf960743e623e48",
+        "android_client_info": {
+          "package_name": "com.example.track_seizure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638021154649-46sv3qu7emp2kt5aj2nqf38cj646vm38.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.track_seizure",
+            "certificate_hash": "c4c29687aa5c7aa029602e09e6458e7afe721337"
+          }
+        },
+        {
+          "client_id": "638021154649-h8olkirjj82kj916efhbdetfs02rg7v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKwpz3fWBi8JBxggHQTv_glP17aqm-fdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638021154649-h8olkirjj82kj916efhbdetfs02rg7v4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

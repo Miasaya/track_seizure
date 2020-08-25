@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:track_seizure/component/localNotifications.dart';
+import 'package:track_seizure/screens/home.dart';
 import 'package:track_seizure/screens/signIn.dart';
 
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Seizure Tracking App', 
-      home: LoginPage()
+      home: HomePage()
     );
   }
 }
