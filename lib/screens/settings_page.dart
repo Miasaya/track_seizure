@@ -5,6 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:track_seizure/component/database/db.dart';
 import 'package:track_seizure/component/header.dart';
 import 'package:track_seizure/component/localNotifications.dart';
+import 'package:track_seizure/component/database/googleDriveIntegration.dart';
 
 int minNotification = 00;
 int hourNotification = 22;
@@ -72,12 +73,21 @@ class _SettingPageState extends State<SettingPage> {
       Settings(
           icon: Icon(Feather.upload_cloud, size: 25),
           title: 'Sync Data with Google Drive',
-          subtitle: 'Save your data in a .csv file to your Drive account',
+          subtitle: 'Save your to your Drive account (NON WORKING YET)',
           warningText:
               'This will export your database to a .csv file in your Drive, proceed ?',
           showTimePick: false,
           onPress: () {
-/*             DatabaseService.db.exportDrive(); */
+            DatabaseService.db.exportDrive(); 
+          }),
+      Settings(
+          icon: Icon(Feather.power, size: 25),
+          title: 'Sign Out from Google Account',
+          subtitle: 'Remove your google account information from the app',
+          warningText: "App will no longer be usable, proceed ?",
+          showTimePick: false,
+          onPress: () async {
+            await AuthManager.signOut();
           }),
     ];
   }

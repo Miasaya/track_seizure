@@ -122,7 +122,7 @@ class DatabaseService{
     }
   }
   
-/*   exportDrive() async{
+  exportDrive() async{
     String path = '/storage/emulated/0/Documents';
     GoogleDrive g = GoogleDrive();
     List<Map<String,dynamic>> result= [];
@@ -139,7 +139,7 @@ class DatabaseService{
     File file = File('$path/ListOfSeizures.csv');
     file.writeAsString(csv);
     await g.upload(file);
-  } */
+  } 
 }
 
 
