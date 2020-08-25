@@ -6,9 +6,9 @@ import 'package:track_seizure/component/database/db.dart';
 import 'package:track_seizure/component/header.dart';
 import 'package:track_seizure/component/localNotifications.dart';
 
-
 int minNotification = 00;
 int hourNotification = 22;
+
 class SettingPage extends StatefulWidget {
   SettingPage({Key key}) : super(key: key);
 
@@ -20,41 +20,46 @@ class _SettingPageState extends State<SettingPage> {
   final Notifications notification = Notifications();
   List settings;
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     settings = [
       Settings(
-        icon: Icon(Feather.bell, size: 25),
-        title: 'Manage Notifications',
-        subtitle: 'Current time : ${hourNotification.toString()}h ${minNotification.toString()}',
-        warningText: "Select desired time and tap on the check button",
-        showTimePick: true,
-        onPress: (){
-          setState(() {
-          });
-          notification.removeReminder(1);
-          notification.showNotificationDaily(1, 'Does anything happened today?', 'Tap here to track', hourNotification,  minNotification);
-        }),
+          icon: Icon(Feather.bell, size: 25),
+          title: 'Manage Notifications',
+          subtitle:
+              'Current time : ${hourNotification.toString()}h ${minNotification.toString()}',
+          warningText: "Select desired time and tap on the check button",
+          showTimePick: true,
+          onPress: () {
+            setState(() {});
+            notification.removeReminder(1);
+            notification.showNotificationDaily(
+                1,
+                'Does anything happened today?',
+                'Tap here to track',
+                hourNotification,
+                minNotification);
+          }),
       Settings(
-        icon: Icon(Feather.upload, size: 25),
-        title: 'Export Data',
-        subtitle: 'Export the database to a .csv file',
-        warningText: 'This will export your database to a .csv file in the Documents folder, proceed ?',
-        showTimePick: false,
-        onPress: (){
-          DatabaseService.db.export();
-        }
-      ),
+          icon: Icon(Feather.upload, size: 25),
+          title: 'Export Data',
+          subtitle: 'Export the database to a .csv file',
+          warningText:
+              'This will export your database to a .csv file in the Documents folder, proceed ?',
+          showTimePick: false,
+          onPress: () {
+            DatabaseService.db.export();
+          }),
       Settings(
-        icon: Icon(Feather.download, size: 25),
-        title: 'Import Data',
-        subtitle: 'Import a database from a .csv file',
-        showTimePick: false,
-        warningText: 'Select a .csv file to be imported, \n WARNING : This will erase your current data',
-        onPress: (){
-          DatabaseService.db.import();
-        }
-      ),
+          icon: Icon(Feather.download, size: 25),
+          title: 'Import Data',
+          subtitle: 'Import a database from a .csv file',
+          showTimePick: false,
+          warningText:
+              'Select a .csv file to be imported, \n WARNING : This will erase your current data',
+          onPress: () {
+            DatabaseService.db.import();
+          }),
       Settings(
           icon: Icon(Feather.trash, size: 25),
           title: 'Erase Data',
@@ -63,7 +68,17 @@ class _SettingPageState extends State<SettingPage> {
           showTimePick: false,
           onPress: () {
             DatabaseService.db.deleteAll();
-            }),
+          }),
+      Settings(
+          icon: Icon(Feather.upload_cloud, size: 25),
+          title: 'Sync Data with Google Drive',
+          subtitle: 'Save your data in a .csv file to your Drive account',
+          warningText:
+              'This will export your database to a .csv file in your Drive, proceed ?',
+          showTimePick: false,
+          onPress: () {
+            DatabaseService.db.exportDrive();
+          }),
     ];
   }
 
@@ -92,12 +107,12 @@ class _SettingPageState extends State<SettingPage> {
                       trailing: settings[index].icon,
                       onTap: () {
                         showBottomSheet(
-                          context: context,
-                          builder: (context) => BottomSheetSettingsContainer(
-                                warningText: settings[index].warningText,
-                                onPress: settings[index].onPress,
-                                showTimePick: settings[index].showTimePick,
-                              ));
+                            context: context,
+                            builder: (context) => BottomSheetSettingsContainer(
+                                  warningText: settings[index].warningText,
+                                  onPress: settings[index].onPress,
+                                  showTimePick: settings[index].showTimePick,
+                                ));
                       },
                     );
                   },
@@ -113,42 +128,50 @@ class Settings {
   String subtitle;
   String warningText;
   Function onPress;
-  bool showTimePick; 
+  bool showTimePick;
   Settings(
-      {this.icon, this.title, this.subtitle, this.warningText, this.onPress, @required this.showTimePick});
+      {this.icon,
+      this.title,
+      this.subtitle,
+      this.warningText,
+      this.onPress,
+      @required this.showTimePick});
 }
 
-
 class BottomSheetSettingsContainer extends StatelessWidget {
-  BottomSheetSettingsContainer({@required this.onPress, @required this.warningText,@required this.showTimePick});
+  BottomSheetSettingsContainer(
+      {@required this.onPress,
+      @required this.warningText,
+      @required this.showTimePick});
 
   final Function onPress;
   final String warningText;
-  final bool showTimePick; 
+  final bool showTimePick;
   Future<TimeOfDay> _selectTime(BuildContext context) {
     final now = DateTime.now();
 
     return showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
-      );
-    }
+      context: context,
+      initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+    );
+  }
 
-  Widget buildButton(BuildContext wcontext, BuildContext tcontext){
-    Widget child; 
-    if (showTimePick){
+  Widget buildButton(BuildContext wcontext, BuildContext tcontext) {
+    Widget child;
+    if (showTimePick) {
       child = Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           RaisedButton(
             onPressed: () async {
               final selectedTime = await _selectTime(tcontext);
-              if (selectedTime == null) return;
+              if (selectedTime == null)
+                return;
               else {
-                hourNotification = selectedTime.hour; 
+                hourNotification = selectedTime.hour;
                 minNotification = selectedTime.minute;
               }
-              },
+            },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
             ),
@@ -200,6 +223,7 @@ class BottomSheetSettingsContainer extends StatelessWidget {
     }
     return child;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -233,10 +257,11 @@ class BottomSheetSettingsContainer extends StatelessWidget {
                 ),
               ),
               Text(warningText, style: kWarningStyle),
-              SizedBox(height: 20,),
-              buildButton(context,context),
+              SizedBox(
+                height: 20,
+              ),
+              buildButton(context, context),
             ]),
-          
       ),
     );
   }

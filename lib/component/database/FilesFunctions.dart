@@ -1,6 +1,5 @@
 import 'package:csv/csv.dart';
 
-
 // Credit to alextekartik for his package https://github.com/tekartik/sqflite_more/tree/master/sqflite_porter
 
 String mapListToCsv(List<Map<String, dynamic>> mapList,

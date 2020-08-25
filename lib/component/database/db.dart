@@ -9,6 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'FilesFunctions.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:csv/csv.dart';
+import 'googleDriveIntegration.dart';
 
 
 class DatabaseService{
@@ -120,7 +121,27 @@ class DatabaseService{
       return e;
     }
   }
+  
+  exportDrive() async{
+    String path = '/storage/emulated/0/Documents';
+    GoogleDrive g = GoogleDrive();
+    List<Map<String,dynamic>> result= [];
+
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+    var data = await db.getAllSeizures();
+    for (int i = 0; i < data.length; i++){
+      result.add(data[i].toMap());
+    }
+    var csv = mapListToCsv(result);
+    File file = File('$path/ListOfSeizures.csv');
+    file.writeAsString(csv);
+    await g.upload(file);
+  }
 }
+
 
 
 
