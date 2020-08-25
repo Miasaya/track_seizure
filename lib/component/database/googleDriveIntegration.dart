@@ -5,69 +5,54 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final _credentials = new ServiceAccountCredentials.fromJson("/client_id.json");
 
 const _scopes = const [go.DriveApi.DriveFileScope];
 
-class SecureStorage {
-  final storage = FlutterSecureStorage();
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/drive.readonly'
+  ],
+);
 
-  //Save Credentials
-  Future saveCredentials(AccessToken token, String refreshToken) async {
-    print(token.expiry.toIso8601String());
-    await storage.write(key: "type", value: token.type);
-    await storage.write(key: "data", value: token.data);
-    await storage.write(key: "expiry", value: token.expiry.toString());
-    await storage.write(key: "refreshToken", value: refreshToken);
-  }
-
-  //Get Saved Credentials
-  Future<Map<String, dynamic>> getCredentials() async {
-    var result = await storage.readAll();
-    if (result.length == 0) return null;
-    return result;
-  }
-
-  //Clear Saved Credentials
-  Future clear() {
-    return storage.deleteAll();
-  }
-}
-
-class GoogleDrive {
-  final storage = SecureStorage();
-
-  Future<http.Client> getClient() async {
-    var credential = await storage.getCredentials();
-
-    if (credential == null) {
-      var authClient =
-          await clientViaUserConsent(_credentials.clientId, _scopes, (url) {
-        launch(url);
-      });
-      await storage.saveCredentials(authClient.credentials.accessToken,
-          authClient.credentials.refreshToken);
-      return authClient;
-    } else {
-      print(credential["expiry"]);
-      return authenticatedClient(
-          http.Client(),
-          AccessCredentials(
-              AccessToken(credential["type"], credential["data"],
-                  DateTime.tryParse(credential["expiry"])),
-              credential["refreshToken"],
-              _scopes));
+class AuthManager {
+  static Future<GoogleSignInAccount> signIn() async {
+    try {
+      final account = await _googleSignIn.signIn();
+      print('account: ${account?.toString()}');
+      return account;
+    } catch (error) {
+      print(error);
+      return null;
     }
   }
 
-  Future upload(File file) async {
-    var client = http.Client();
-    var drive = go.DriveApi(client);
-    var response = await drive.files.create(
-        go.File()..name = path.basename(file.absolute.path),
-        uploadMedia: go.Media(file.openRead(), file.lengthSync()));
+  static Future<GoogleSignInAccount> signInSilently() async {
+    var account = await _googleSignIn.signInSilently();
+    print('account: $account');
+    return account;
+  }
 
-    print("Results ${response.toJson}");
+  static Future<void> signOut() async {
+    try {
+      _googleSignIn.disconnect();
+    } catch (error) {
+      print(error);
+    }
   }
 }
+
+
+Future upload(File file) async {
+  var client = http.Client();
+  var drive = go.DriveApi(client);
+  var response = await drive.files.create(
+      go.File()..name = path.basename(file.absolute.path),
+      uploadMedia: go.Media(file.openRead(), file.lengthSync()));
+
+  print("Results ${response.toJson}");
+}
+

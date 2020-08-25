@@ -77,7 +77,7 @@ class _SettingPageState extends State<SettingPage> {
               'This will export your database to a .csv file in your Drive, proceed ?',
           showTimePick: false,
           onPress: () {
-            DatabaseService.db.exportDrive();
+/*             DatabaseService.db.exportDrive(); */
           }),
     ];
   }
