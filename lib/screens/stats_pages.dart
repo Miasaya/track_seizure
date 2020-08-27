@@ -63,24 +63,24 @@ class _StatsPageState extends State<StatsPage> {
   List<LineChartBarData> linesBarData1(List<Seizure> snapshot) {
     final LineChartBarData lineChartBarData1 = LineChartBarData(
       spots: [
-        FlSpot(1, getNumberEntries(snapshot,'01')[0]),
-        FlSpot(2, getNumberEntries(snapshot,'2')[0]),
-        FlSpot(3, getNumberEntries(snapshot,'3')[0]),
-        FlSpot(4, getNumberEntries(snapshot,'4')[0]),
-        FlSpot(5, getNumberEntries(snapshot,'5')[0]),
-        FlSpot(6, getNumberEntries(snapshot,'6')[0]),
-        FlSpot(7, getNumberEntries(snapshot,'7')[0]),
-        FlSpot(8, getNumberEntries(snapshot,'8')[0]),
-        FlSpot(9, getNumberEntries(snapshot,'9')[0]),
-        FlSpot(10, getNumberEntries(snapshot,'10')[0]),
-        FlSpot(11, getNumberEntries(snapshot,'11')[0]),
-        FlSpot(12, getNumberEntries(snapshot,'12')[0]),
+        FlSpot(0, getNumberEntries(snapshot,'01')[0].toDouble()),
+        FlSpot(1, getNumberEntries(snapshot,'02')[0].toDouble()),
+        FlSpot(2, getNumberEntries(snapshot,'03')[0].toDouble()),
+        FlSpot(3, getNumberEntries(snapshot,'04')[0].toDouble()),
+        FlSpot(4, getNumberEntries(snapshot,'05')[0].toDouble()),
+        FlSpot(5, getNumberEntries(snapshot,'06')[0].toDouble()),
+        FlSpot(6, getNumberEntries(snapshot,'07')[0].toDouble()),
+        FlSpot(7, getNumberEntries(snapshot,'08')[0].toDouble()),
+        FlSpot(8, getNumberEntries(snapshot,'09')[0].toDouble()),
+        FlSpot(9, getNumberEntries(snapshot,'10')[0].toDouble()),
+        FlSpot(10, getNumberEntries(snapshot,'11')[0].toDouble()),
+        FlSpot(11, getNumberEntries(snapshot,'12')[0].toDouble()),
       ],
       isCurved: true,
       colors: [
-        const Color(0xff4af699),
+        kAbsenceColor,
       ],
-      barWidth: 8,
+      barWidth: 5,
       isStrokeCapRound: true,
       dotData: FlDotData(
         show: false,
@@ -91,24 +91,24 @@ class _StatsPageState extends State<StatsPage> {
     );
     final LineChartBarData lineChartBarData2 = LineChartBarData(
       spots: [
-        FlSpot(1, getNumberEntries(snapshot,'01')[1]),
-        FlSpot(2, getNumberEntries(snapshot,'02')[1]),
-        FlSpot(3, getNumberEntries(snapshot,'03')[1]),
-        FlSpot(4, getNumberEntries(snapshot,'04')[1]),
-        FlSpot(5, getNumberEntries(snapshot,'05')[1]),
-        FlSpot(6, getNumberEntries(snapshot,'06')[1]),
-        FlSpot(7, getNumberEntries(snapshot,'07')[1]),
-        FlSpot(8, getNumberEntries(snapshot,'08')[1]),
-        FlSpot(9, getNumberEntries(snapshot,'09')[1]),
-        FlSpot(10, getNumberEntries(snapshot,'10')[1]),
-        FlSpot(11, getNumberEntries(snapshot,'11')[1]),
-        FlSpot(12, getNumberEntries(snapshot,'12')[1]),
+        FlSpot(0, getNumberEntries(snapshot,'01')[1].toDouble()),
+        FlSpot(1, getNumberEntries(snapshot,'02')[1].toDouble()),
+        FlSpot(2.0, getNumberEntries(snapshot,'03')[1].toDouble()),
+        FlSpot(3.0, getNumberEntries(snapshot,'04')[1].toDouble()),
+        FlSpot(4.0, getNumberEntries(snapshot,'05')[1].toDouble()),
+        FlSpot(5.0, getNumberEntries(snapshot,'06')[1].toDouble()),
+        FlSpot(6.0, getNumberEntries(snapshot,'07')[1].toDouble()),
+        FlSpot(7.0, getNumberEntries(snapshot,'08')[1].toDouble()),
+        FlSpot(8.0, getNumberEntries(snapshot,'09')[1].toDouble()),
+        FlSpot(9.0, getNumberEntries(snapshot,'10')[1].toDouble()),
+        FlSpot(10.0, getNumberEntries(snapshot,'11')[1].toDouble()),
+        FlSpot(11.0, getNumberEntries(snapshot,'12')[1].toDouble()),
       ],
       isCurved: true,
       colors: [
-        const Color(0xffaa4cfc),
+        kGeneralizedColor,
       ],
-      barWidth: 8,
+      barWidth: 5,
       isStrokeCapRound: true,
       dotData: FlDotData(
         show: false,
@@ -119,24 +119,24 @@ class _StatsPageState extends State<StatsPage> {
     );
     final LineChartBarData lineChartBarData3 = LineChartBarData(
       spots: [
-        FlSpot(1, getNumberEntries(snapshot,'01')[2]),
-        FlSpot(2, getNumberEntries(snapshot,'02')[2]),
-        FlSpot(3, getNumberEntries(snapshot,'03')[2]),
-        FlSpot(4, getNumberEntries(snapshot,'04')[2]),
-        FlSpot(5, getNumberEntries(snapshot,'05')[2]),
-        FlSpot(6, getNumberEntries(snapshot,'06')[2]),
-        FlSpot(7, getNumberEntries(snapshot,'07')[2]),
-        FlSpot(8, getNumberEntries(snapshot,'08')[2]),
-        FlSpot(9, getNumberEntries(snapshot,'09')[2]),
-        FlSpot(10, getNumberEntries(snapshot,'10')[2]),
-        FlSpot(11, getNumberEntries(snapshot,'11')[2]),
-        FlSpot(12, getNumberEntries(snapshot,'12')[2]),
+        FlSpot(0, getNumberEntries(snapshot,'01')[2].toDouble()),
+        FlSpot(1, getNumberEntries(snapshot,'02')[2].toDouble()),
+        FlSpot(2, getNumberEntries(snapshot,'03')[2].toDouble()),
+        FlSpot(3, getNumberEntries(snapshot,'04')[2].toDouble()),
+        FlSpot(4, getNumberEntries(snapshot,'05')[2].toDouble()),
+        FlSpot(5, getNumberEntries(snapshot,'06')[2].toDouble()),
+        FlSpot(6, getNumberEntries(snapshot,'07')[2].toDouble()),
+        FlSpot(7, getNumberEntries(snapshot,'08')[2].toDouble()),
+        FlSpot(8, getNumberEntries(snapshot,'09')[2].toDouble()),
+        FlSpot(9, getNumberEntries(snapshot,'10')[2].toDouble()),
+        FlSpot(10, getNumberEntries(snapshot,'11')[2].toDouble()),
+        FlSpot(11, getNumberEntries(snapshot,'12')[2].toDouble()),
       ],
       isCurved: true,
-      colors: const [
-        Color(0xff27b6fc),
+      colors: [
+        kOtherColor,
       ],
-      barWidth: 8,
+      barWidth: 5,
       isStrokeCapRound: true,
       dotData: FlDotData(
         show: false,
@@ -147,7 +147,7 @@ class _StatsPageState extends State<StatsPage> {
     );
     return [
       lineChartBarData1,
-      lineChartBarData2,
+      lineChartBarData2, 
       lineChartBarData3,
     ];
   }
@@ -191,10 +191,13 @@ class _StatsPageState extends State<StatsPage> {
                             child: Text("Monthly Chart :", style: trackHeaderStyle),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left:62.0),
-                            child: LineChart(
-                                buildLineData(snapshotList),
-                              ),
+                            padding: const EdgeInsets.only(left:15.0),
+                            child: Container(
+                              width: 400.0,
+                              child: LineChart(
+                                  buildLineData(snapshotList),
+                                ),
+                            ),
                             ),
                         ]
                       ),
@@ -211,12 +214,12 @@ class _StatsPageState extends State<StatsPage> {
     return LineChartData(
       lineTouchData: LineTouchData(
         touchTooltipData: LineTouchTooltipData(
-          tooltipBgColor: Colors.blueGrey.withOpacity(0.8),
+          tooltipBgColor: Colors.grey[800],
         ),
       touchCallback: (LineTouchResponse touchResponse) {},
       handleBuiltInTouches: true,
       ),
-      gridData: FlGridData(show:false),
+      gridData: FlGridData(show: false),
       titlesData: FlTitlesData(
         bottomTitles: SideTitles(
           showTitles: true,
@@ -224,7 +227,8 @@ class _StatsPageState extends State<StatsPage> {
               color: const Color(0xff7589a2),
               fontWeight: FontWeight.bold,
               fontSize: 14),
-          margin: 20,
+          margin: 10,
+          reservedSize: 30.0,
           getTitles: (double value) {
             switch (value.toInt()) {
               case 0:
@@ -257,14 +261,14 @@ class _StatsPageState extends State<StatsPage> {
           },
         ),
         leftTitles: SideTitles(
-          showTitles: false,
+          showTitles: true,
           textStyle: TextStyle(
             color: const Color(0xff7589a2),
             fontWeight: FontWeight.bold,
             fontSize: 14),
           getTitles: (value) {
-            if (value == 0) {
-              return '0';
+            if (value == 5) {
+              return '5';
             } else if (value == 10) {
               return '10';
             } else if (value == 20) {
@@ -293,10 +297,10 @@ class _StatsPageState extends State<StatsPage> {
           ),
         ),
       ),
-      minX: 0,
-      maxX: 12,
-      maxY: 40,
-      minY: 0,
+      minX: 0.0,
+      maxX: 12.0,
+      maxY: 25.0,
+      minY: 0.0,
       lineBarsData: linesBarData1(snapshot),
     );
   }
