@@ -52,11 +52,11 @@ const Color kBottomGradientColor = Color(0xFF554BD8);
 
 const Color kTopGradientColor = Color(0xFF804CD9);
 
-Color kAbsenceColor = Colors.orange[300];
+Color kAbsenceColor = Color(0xFF8339FF);
 
-Color kGeneralizedColor = Colors.red[400];
+Color kGeneralizedColor = Color(0xFF50109A);
 
-Color kOtherColor = Colors.green[400];
+Color kOtherColor = Color(0xFFF8C0FF);
 
 
 // Log constants // 
