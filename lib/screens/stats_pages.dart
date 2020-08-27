@@ -59,33 +59,96 @@ class _StatsPageState extends State<StatsPage> {
     });
   }
 
-  List<BarChartGroupData> _showingBarGroups (List<Seizure> snapshot) {
-    BarChartGroupData barGroup1 = makeGroupData(0, getNumberEntries(snapshot,'01')[0], getNumberEntries(snapshot,'01')[1],getNumberEntries(snapshot,'01')[2]);
-    BarChartGroupData barGroup2 = makeGroupData(1, getNumberEntries(snapshot,'02')[0], getNumberEntries(snapshot,'02')[1],getNumberEntries(snapshot,'02')[2]);
-    BarChartGroupData barGroup3 = makeGroupData(2, getNumberEntries(snapshot,'03')[0], getNumberEntries(snapshot,'03')[1],getNumberEntries(snapshot,'03')[2]);
-    BarChartGroupData barGroup4 = makeGroupData(3, getNumberEntries(snapshot,'04')[0], getNumberEntries(snapshot,'04')[1],getNumberEntries(snapshot,'04')[2]);
-    BarChartGroupData barGroup5 = makeGroupData(4, getNumberEntries(snapshot,'05')[0], getNumberEntries(snapshot,'05')[1],getNumberEntries(snapshot,'05')[2]);
-    BarChartGroupData barGroup6 = makeGroupData(5, getNumberEntries(snapshot,'06')[0], getNumberEntries(snapshot,'06')[1],getNumberEntries(snapshot,'06')[2]);
-    BarChartGroupData barGroup7 = makeGroupData(6, getNumberEntries(snapshot,'07')[0], getNumberEntries(snapshot,'07')[1],getNumberEntries(snapshot,'07')[2]);
-    BarChartGroupData barGroup8 = makeGroupData(7, getNumberEntries(snapshot,'08')[0], getNumberEntries(snapshot,'08')[1],getNumberEntries(snapshot,'08')[2]);
-    BarChartGroupData barGroup9 = makeGroupData(8, getNumberEntries(snapshot,'09')[0], getNumberEntries(snapshot,'09')[1],getNumberEntries(snapshot,'09')[2]);
-    BarChartGroupData barGroup10 = makeGroupData(9, getNumberEntries(snapshot,'10')[0], getNumberEntries(snapshot,'10')[1],getNumberEntries(snapshot,'10')[2]);
-    BarChartGroupData barGroup11 = makeGroupData(10, getNumberEntries(snapshot,'11')[0], getNumberEntries(snapshot,'11')[1],getNumberEntries(snapshot,'11')[2]);
-    BarChartGroupData barGroup12 = makeGroupData(11, getNumberEntries(snapshot,'12')[0], getNumberEntries(snapshot,'12')[1],getNumberEntries(snapshot,'12')[2]);
 
+  List<LineChartBarData> linesBarData1(List<Seizure> snapshot) {
+    final LineChartBarData lineChartBarData1 = LineChartBarData(
+      spots: [
+        FlSpot(1, getNumberEntries(snapshot,'01')[0]),
+        FlSpot(2, getNumberEntries(snapshot,'2')[0]),
+        FlSpot(3, getNumberEntries(snapshot,'3')[0]),
+        FlSpot(4, getNumberEntries(snapshot,'4')[0]),
+        FlSpot(5, getNumberEntries(snapshot,'5')[0]),
+        FlSpot(6, getNumberEntries(snapshot,'6')[0]),
+        FlSpot(7, getNumberEntries(snapshot,'7')[0]),
+        FlSpot(8, getNumberEntries(snapshot,'8')[0]),
+        FlSpot(9, getNumberEntries(snapshot,'9')[0]),
+        FlSpot(10, getNumberEntries(snapshot,'10')[0]),
+        FlSpot(11, getNumberEntries(snapshot,'11')[0]),
+        FlSpot(12, getNumberEntries(snapshot,'12')[0]),
+      ],
+      isCurved: true,
+      colors: [
+        const Color(0xff4af699),
+      ],
+      barWidth: 8,
+      isStrokeCapRound: true,
+      dotData: FlDotData(
+        show: false,
+      ),
+      belowBarData: BarAreaData(
+        show: false,
+      ),
+    );
+    final LineChartBarData lineChartBarData2 = LineChartBarData(
+      spots: [
+        FlSpot(1, getNumberEntries(snapshot,'01')[1]),
+        FlSpot(2, getNumberEntries(snapshot,'02')[1]),
+        FlSpot(3, getNumberEntries(snapshot,'03')[1]),
+        FlSpot(4, getNumberEntries(snapshot,'04')[1]),
+        FlSpot(5, getNumberEntries(snapshot,'05')[1]),
+        FlSpot(6, getNumberEntries(snapshot,'06')[1]),
+        FlSpot(7, getNumberEntries(snapshot,'07')[1]),
+        FlSpot(8, getNumberEntries(snapshot,'08')[1]),
+        FlSpot(9, getNumberEntries(snapshot,'09')[1]),
+        FlSpot(10, getNumberEntries(snapshot,'10')[1]),
+        FlSpot(11, getNumberEntries(snapshot,'11')[1]),
+        FlSpot(12, getNumberEntries(snapshot,'12')[1]),
+      ],
+      isCurved: true,
+      colors: [
+        const Color(0xffaa4cfc),
+      ],
+      barWidth: 8,
+      isStrokeCapRound: true,
+      dotData: FlDotData(
+        show: false,
+      ),
+      belowBarData: BarAreaData(show: false, colors: [
+        const Color(0x00aa4cfc),
+      ]),
+    );
+    final LineChartBarData lineChartBarData3 = LineChartBarData(
+      spots: [
+        FlSpot(1, getNumberEntries(snapshot,'01')[2]),
+        FlSpot(2, getNumberEntries(snapshot,'02')[2]),
+        FlSpot(3, getNumberEntries(snapshot,'03')[2]),
+        FlSpot(4, getNumberEntries(snapshot,'04')[2]),
+        FlSpot(5, getNumberEntries(snapshot,'05')[2]),
+        FlSpot(6, getNumberEntries(snapshot,'06')[2]),
+        FlSpot(7, getNumberEntries(snapshot,'07')[2]),
+        FlSpot(8, getNumberEntries(snapshot,'08')[2]),
+        FlSpot(9, getNumberEntries(snapshot,'09')[2]),
+        FlSpot(10, getNumberEntries(snapshot,'10')[2]),
+        FlSpot(11, getNumberEntries(snapshot,'11')[2]),
+        FlSpot(12, getNumberEntries(snapshot,'12')[2]),
+      ],
+      isCurved: true,
+      colors: const [
+        Color(0xff27b6fc),
+      ],
+      barWidth: 8,
+      isStrokeCapRound: true,
+      dotData: FlDotData(
+        show: false,
+      ),
+      belowBarData: BarAreaData(
+        show: false,
+      ),
+    );
     return [
-      barGroup1,
-      barGroup2,
-      barGroup3,
-      barGroup4,
-      barGroup5,
-      barGroup6,
-      barGroup7,
-      barGroup8,
-      barGroup9,
-      barGroup10,
-      barGroup11,
-      barGroup12,
+      lineChartBarData1,
+      lineChartBarData2,
+      lineChartBarData3,
     ];
   }
 
@@ -129,20 +192,10 @@ class _StatsPageState extends State<StatsPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left:62.0),
-                            child: BarChart(
-                              BarChartData(
-                                maxY: 20,
-                                groupsSpace: 16,
-                                alignment: BarChartAlignment.center,
-                                barTouchData: BarTouchData(enabled: false),
-                                titlesData: buildFlTitlesData(),
-                                borderData: FlBorderData(
-                                  show: false,
-                                ),
-                                barGroups: _showingBarGroups(snapshotList),
+                            child: LineChart(
+                                buildLineData(snapshotList),
                               ),
                             ),
-                          ),
                         ]
                       ),
                     );
@@ -154,67 +207,97 @@ class _StatsPageState extends State<StatsPage> {
         });
   }
 
-  FlTitlesData buildFlTitlesData() {
-    return FlTitlesData(
-      show: true,
-      bottomTitles: SideTitles(
-        showTitles: true,
-        textStyle: TextStyle(
+  LineChartData buildLineData(List<Seizure> snapshot) {
+    return LineChartData(
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+          tooltipBgColor: Colors.blueGrey.withOpacity(0.8),
+        ),
+      touchCallback: (LineTouchResponse touchResponse) {},
+      handleBuiltInTouches: true,
+      ),
+      gridData: FlGridData(show:false),
+      titlesData: FlTitlesData(
+        bottomTitles: SideTitles(
+          showTitles: true,
+          textStyle: TextStyle(
+              color: const Color(0xff7589a2),
+              fontWeight: FontWeight.bold,
+              fontSize: 14),
+          margin: 20,
+          getTitles: (double value) {
+            switch (value.toInt()) {
+              case 0:
+                return 'Jan';
+              case 1:
+                return 'Feb';
+              case 2:
+                return 'Mar';
+              case 3:
+                return 'Apr';
+              case 4:
+                return 'May';
+              case 5:
+                return 'Jun';
+              case 6:
+                return 'Jul';
+              case 7:
+                return 'Aug';
+              case 8:
+                return 'Sep';
+              case 9:
+                return 'Oct';
+              case 10:
+                return 'Nov';
+              case 11:
+                return 'Dec';
+              default:
+                return '';
+            }
+          },
+        ),
+        leftTitles: SideTitles(
+          showTitles: false,
+          textStyle: TextStyle(
             color: const Color(0xff7589a2),
             fontWeight: FontWeight.bold,
             fontSize: 14),
-        margin: 20,
-        getTitles: (double value) {
-          switch (value.toInt()) {
-            case 0:
-              return 'Jan';
-            case 1:
-              return 'Feb';
-            case 2:
-              return 'Mar';
-            case 3:
-              return 'Apr';
-            case 4:
-              return 'May';
-            case 5:
-              return 'Jun';
-            case 6:
-              return 'Jul';
-            case 7:
-              return 'Aug';
-            case 8:
-              return 'Sep';
-            case 9:
-              return 'Oct';
-            case 10:
-              return 'Nov';
-            case 11:
-              return 'Dec';
-            default:
+          getTitles: (value) {
+            if (value == 0) {
+              return '0';
+            } else if (value == 10) {
+              return '10';
+            } else if (value == 20) {
+              return '20';
+            } else {
               return '';
-          }
-        },
+            }
+          },
+        ),
       ),
-      leftTitles: SideTitles(
-        showTitles: false,
-        textStyle: TextStyle(
-          color: const Color(0xff7589a2),
-          fontWeight: FontWeight.bold,
-          fontSize: 14),
-        margin:20,
-        reservedSize: 0,
-        getTitles: (value) {
-          if (value == 0) {
-            return '0';
-          } else if (value == 10) {
-            return '10';
-          } else if (value == 20) {
-            return '20';
-          } else {
-            return '';
-          }
-        },
+      borderData: FlBorderData(
+        show: true,
+        border: const Border(
+          bottom: BorderSide(
+            color: Color(0xff4e4965),
+            width: 4,
+          ),
+          left: BorderSide(
+            color: Colors.transparent,
+          ),
+          right: BorderSide(
+            color: Colors.transparent,
+          ),
+          top: BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
       ),
+      minX: 0,
+      maxX: 12,
+      maxY: 40,
+      minY: 0,
+      lineBarsData: linesBarData1(snapshot),
     );
   }
   PieChart buildPieChart() {
