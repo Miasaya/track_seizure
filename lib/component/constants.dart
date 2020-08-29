@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+// HomePage + General theming
 const TextStyle trackHeaderStyle = TextStyle(
   fontSize: 30, 
   fontWeight: FontWeight.bold,
-  fontFamily: 'Open',
+  fontFamily: 'Montserrat',
   color: Color(0xFF707070),
   );
 
@@ -17,10 +18,11 @@ const TextStyle kHeaderTextStyle = TextStyle(
 const TextStyle kTrackingButton = TextStyle(
   fontSize: 18, 
   fontWeight: FontWeight.bold,
-  fontFamily: 'Open',
+  fontFamily: 'Montserrat',
   color: Colors.white,
   );
 
+// Entry page 
 const TextStyle kNewEntryTextStyleInactive = TextStyle(
   fontSize: 14, 
   fontFamily: 'April',
@@ -37,14 +39,14 @@ const TextStyle kNewEntryTextStyleActive = TextStyle(
 const TextStyle kInputTextStyle = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.bold,
-  fontFamily: 'April',
+  fontFamily: 'Montserrat',
   color: Colors.white
 );
 
 const TextStyle kEntryDate= TextStyle(
   fontSize: 20, 
   fontWeight: FontWeight.normal,
-  fontFamily: 'Open',
+  fontFamily: 'Montserrat',
   color: Color(0xFF707070),
   );
 
@@ -52,11 +54,11 @@ const Color kBottomGradientColor = Color(0xFF554BD8);
 
 const Color kTopGradientColor = Color(0xFF804CD9);
 
-Color kAbsenceColor = Color(0xFF8339FF);
+Color kAbsenceColor = Color(0xFF764EA1);
 
-Color kGeneralizedColor = Color(0xFF50109A);
+Color kGeneralizedColor = Color(0xFF55218B);
 
-Color kOtherColor = Color(0xFFF8C0FF);
+Color kOtherColor = Color(0xFF8B6AB0);
 
 
 // Log constants // 
@@ -64,14 +66,21 @@ const Color kLogListShadow = Color(0x14554BD8);
 const TextStyle kLogDateStyle = TextStyle(
   fontSize: 23, 
   fontWeight: FontWeight.bold,
-  fontFamily: 'Open',
+  fontFamily: 'Montserrat',
   color: Color(0xFF404040),
   );
 
 const TextStyle kLogTypeStyle = TextStyle(
-  fontSize: 15, 
+  fontSize: 17, 
   fontWeight: FontWeight.normal,
-  fontFamily: 'Open',
+  fontFamily: 'Montserrat',
+  color: Color(0xFF707070),
+  );
+
+const TextStyle kLogTypeStyleBold = TextStyle(
+  fontSize: 17, 
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Montserrat',
   color: Color(0xFF707070),
   );
 

@@ -73,7 +73,7 @@ class _SettingPageState extends State<SettingPage> {
       Settings(
           icon: Icon(Feather.upload_cloud, size: 25),
           title: 'Sync Data with Google Drive',
-          subtitle: 'Save your to your Drive account (NON WORKING YET)',
+          subtitle: 'Save your to your Drive account (NOT WORKING YET)',
           warningText:
               'This will export your database to a .csv file in your Drive, proceed ?',
           showTimePick: false,

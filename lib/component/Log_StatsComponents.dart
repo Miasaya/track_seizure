@@ -40,11 +40,36 @@ class BottomSheetContainer extends StatelessWidget {
             ),
             Text("Summary of the seizure: ", style:  kLogDateStyle ),
             SizedBox(height: 14,),
-            Text("TIME: " + entry.date, style:  kLogTypeStyle ),
-            Text("TYPE: " + entry.type, style : kLogTypeStyle),
-            Text("LENGTH: " + entry.length.toString() +" sec",style:kLogTypeStyle),
-            Text("INTENSITY: " + entry.feel.toString() +" /10",style:kLogTypeStyle),
-            Text("NOTES: " + entry.note ,style:kLogTypeStyle),
+            Row(
+              children: [
+                Text("Time: ", style:  kLogTypeStyleBold ),
+                Text(entry.date, style: kLogTypeStyle,)
+              ],
+            ),
+            Row(
+              children: [
+                Text("Type: ", style : kLogTypeStyleBold ),
+                Text(entry.type, style: kLogTypeStyle,)
+              ],
+            ),
+            Row(
+              children: [
+                Text("Length: ",style:kLogTypeStyleBold ),
+                Text(entry.length.toString()+" sec", style: kLogTypeStyle,)
+              ],
+            ),
+            Row(
+              children: [
+                Text("Intensity: ",style:kLogTypeStyleBold ),
+                Text(entry.feel.toString() +" /10", style: kLogTypeStyle,)
+              ],
+            ),
+            Row(
+              children: [
+                Text("Notes: ",style:kLogTypeStyleBold ),
+                Text(entry.note, style: kLogTypeStyle,)
+              ],
+            ),
             SizedBox(height: 14,),
             Center(
               child: Row(

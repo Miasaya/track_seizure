@@ -92,7 +92,8 @@ class _StatsPageState extends State<StatsPage> {
         show: false,
       ),
       belowBarData: BarAreaData(
-        show: false,
+        show: true,
+        colors: [kAbsenceColor.withOpacity(0.3)]
       ),
     );
     final LineChartBarData lineChartBarData2 = LineChartBarData(
@@ -120,9 +121,10 @@ class _StatsPageState extends State<StatsPage> {
       dotData: FlDotData(
         show: false,
       ),
-      belowBarData: BarAreaData(show: false, colors: [
-        const Color(0x00aa4cfc),
-      ]),
+      belowBarData: BarAreaData(
+        show: true,
+        colors: [kGeneralizedColor.withOpacity(0.3)]
+      ),
     );
     final LineChartBarData lineChartBarData3 = LineChartBarData(
       spots: [
@@ -150,7 +152,8 @@ class _StatsPageState extends State<StatsPage> {
         show: false,
       ),
       belowBarData: BarAreaData(
-        show: false,
+        show: true,
+        colors: [kOtherColor.withOpacity(0.3)]
       ),
     );
     return [
@@ -184,7 +187,7 @@ class _StatsPageState extends State<StatsPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 15.0),
+                              padding: const EdgeInsets.only(left: 15.0,top: 10.0),
                               child: Text("Type :", style: trackHeaderStyle),
                             ),
                             Row(
@@ -200,7 +203,7 @@ class _StatsPageState extends State<StatsPage> {
                                   style: trackHeaderStyle),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 15.0),
+                              padding: const EdgeInsets.only(left: 10.0),
                               child: Container(
                                 width: 380.0,
                                 child: LineChart(

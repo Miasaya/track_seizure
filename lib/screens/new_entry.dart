@@ -93,19 +93,6 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       EntryOption(
-                        colour: kAbsenceColor,
-                        text: 'Absence',
-                        icon: FontAwesome.eye,
-                        onPress: () {
-                          setState(() {
-                            selectedType = "Absence";
-                          });
-                        },
-                        textstyle: selectedType == "Absence"
-                            ? kNewEntryTextStyleActive
-                            : kNewEntryTextStyleInactive,
-                      ),
-                      EntryOption(
                         colour: kGeneralizedColor,
                         text: 'Generalized',
                         icon: FontAwesome.male,
@@ -115,6 +102,19 @@ class _NewEntryPageState extends State<NewEntryPage> {
                           });
                         },
                         textstyle: selectedType == "Generalized"
+                            ? kNewEntryTextStyleActive
+                            : kNewEntryTextStyleInactive,
+                      ),
+                      EntryOption(
+                        colour: kAbsenceColor,
+                        text: 'Absence',
+                        icon: FontAwesome.eye,
+                        onPress: () {
+                          setState(() {
+                            selectedType = "Absence";
+                          });
+                        },
+                        textstyle: selectedType == "Absence"
                             ? kNewEntryTextStyleActive
                             : kNewEntryTextStyleInactive,
                       ),
@@ -146,11 +146,14 @@ class _NewEntryPageState extends State<NewEntryPage> {
                         overlayColor: Color(0x295126AB),
                         thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
                         overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+                        inactiveTickMarkColor: Colors.transparent,
+                        activeTickMarkColor: Colors.transparent
                       ),
                       child: Slider(
                           value: length.toDouble(),
                           min: 10.0,
-                          max: 120.0,
+                          max: 240.0,
+                          divisions: 23,
                           onChanged: (double newValue) {
                             setState(() {
                               length = newValue.round();
