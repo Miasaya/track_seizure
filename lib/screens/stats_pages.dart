@@ -153,7 +153,7 @@ class _StatsPageState extends State<StatsPage> {
       ),
       belowBarData: BarAreaData(
         show: true,
-        colors: [kOtherColor.withOpacity(0.3)]
+        colors: [Colors.white]
       ),
     );
     return [
