@@ -45,7 +45,7 @@ class _LogPageState extends State<LogPage> {
                           onTap: () {
                             showBottomSheet(
                               context: context, 
-                              builder: (context) => BottomSheetContainer(entry: elem,) //TODO: Change the style to make it more friendly
+                              builder: (context) => BottomSheetContainer(entry: elem,)
                               );
                           },
                         );
