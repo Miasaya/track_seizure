@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Seizure Tracking App', 
-      home: LoginPage()
+      home: HomePage()
     );
   }
 }
