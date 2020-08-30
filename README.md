@@ -5,18 +5,19 @@ Build to fit the Oneplus7t pro screen ratio only.
 
 ## Features : 
 
-<img src="https://i.imgur.com/PwL5vpH.jpg" width="250"/>
-Tracking features : 
+<img src="https://i.imgur.com/PwL5vpH.jpg" width="300"/>
+### Tracking features : 
   - Time selection
   - Type selection : Absence, Generalized and Other 
   - Length and Intensity
   - Additional notes if needed 
 
-Log pages 
+### Log pages 
 
-Basic statistics 
-![Stats Page](https://i.imgur.com/juAZAq7.jpg|width=200)
+### Basic statistics 
+<img src="https://i.imgur.com/juAZAq7.jpg" width="300"/>
 
+### Options 
 Import/Export to .csv file 
 
 Daily Notification reminder 
