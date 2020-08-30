@@ -4,7 +4,7 @@ Build to track my seizure on the daily basis.
 Build to fit the Oneplus7t pro screen ratio only. 
 
 ## Features : 
-![Home Page](https://i.imgur.com/PwL5vpH.jpg)
+![Home Page](https://i.imgur.com/PwL5vpH.jpg|width=200)
 Tracking features : 
   - Time selection
   - Type selection : Absence, Generalized and Other 
@@ -14,7 +14,7 @@ Tracking features :
 Log pages 
 
 Basic statistics 
-![Stats Page](https://i.imgur.com/juAZAq7.jpg)
+![Stats Page](https://i.imgur.com/juAZAq7.jpg|width=200)
 
 Import/Export to .csv file 
 
