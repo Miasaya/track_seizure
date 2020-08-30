@@ -205,7 +205,7 @@ class _StatsPageState extends State<StatsPage> {
                             Padding(
                               padding: const EdgeInsets.only(left: 10.0),
                               child: Container(
-                                width: 380.0,
+                                width: 370.0,
                                 child: LineChart(
                                   buildLineData(snapshotList),
                                 ),

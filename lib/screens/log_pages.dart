@@ -29,6 +29,7 @@ class _LogPageState extends State<LogPage> {
                 maxChildSize: 0.90,
                 builder: (context, scrollController) {
                   return Container(
+                    padding: EdgeInsets.only(top: 10.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(topRight : Radius.circular(40.0),topLeft: Radius.circular(40.0))
