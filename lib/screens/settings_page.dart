@@ -23,6 +23,8 @@ class _SettingPageState extends State<SettingPage> {
   @override
   void initState() {
     super.initState();
+    notification.showNotificationDaily(1, 'Does anything happened today?',
+        'Tap here to track', hourNotification, minNotification);
     settings = [
       Settings(
           icon: Icon(Feather.bell, size: 25),
