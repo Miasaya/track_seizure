@@ -12,9 +12,9 @@ Build to fit the Oneplus7t pro screen ratio only.
   - Type selection : Absence, Generalized and Other 
   - Length and Intensity
   - Additional notes if needed 
-<img src="https://i.imgur.com/GFLknaQ.mp4" width="300"/>
+  
 ### Log pages 
-<img src="https://i.imgur.com/4auVyWb.mp4" width="300"/>
+
 ### Basic statistics 
 <img src="https://i.imgur.com/juAZAq7.jpg" width="300"/>
 
