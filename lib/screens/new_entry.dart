@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:googleapis/admob/v1.dart';
 import 'package:intl/intl.dart';
 
 import 'package:track_seizure/component/database/db.dart';
@@ -22,14 +23,35 @@ class _NewEntryPageState extends State<NewEntryPage> {
   Seizure seizeEntry;
   _NewEntryPageState({this.seizeEntry});
 
-
+  
   TextEditingController nameController = TextEditingController();
   String selectedType = "";
   int length = 60;
   int feel = 5;
   String note = "";
   String dateTime = (DateFormat('dd-MM-yy – kk:mm').format(DateTime.now()));
+  TimeOfDay time = TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
+  DateTime date = DateTime.utc(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   String status = "new";
+
+  Future<TimeOfDay> _selectTime(BuildContext context) {
+    final now = DateTime.now();
+
+    return showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: now.hour, minute: now.minute),
+    );
+  }
+  Future<DateTime> _selectDate(BuildContext context){
+    final now = DateTime.now();
+
+    return showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2035),
+    );
+  }
   @override
   void initState() {
     if (seizeEntry != null){
@@ -64,25 +86,35 @@ class _NewEntryPageState extends State<NewEntryPage> {
                         style: trackHeaderStyle,
                       ),
                       FlatButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (status=="new"){
-                            DatePicker.showDateTimePicker(context,
-                              showTitleActions: true,
-                              minTime: DateTime(2018, 3, 5),
-                              maxTime: DateTime.now(), 
-                              onConfirm: (date) {
-                                setState(() {
-                                  dateTime = (DateFormat('dd-MM-yy – kk:mm').format(date)).toString();
-                                });
-                                print(dateTime);
-                              }, 
-                              currentTime: DateTime.now(), 
-                              locale: LocaleType.en
-                              );
-                          }
+                            final selectedDate = await _selectDate(context);
+                            if (TextSelectionGestureDetectorBuilderDelegate == null)
+                              return;
+                            else {
+                              setState(() {
+                                date = selectedDate;
+                              });
+                            }
+                          };
                           },
-                        child: Text(dateTime, style: kEntryDate),
-                        ),
+                        child: Text(date.day.toString()+"-"+date.month.toString()+"-"+date.year.toString(), style: kEntryDate),
+                      ),
+                      FlatButton(
+                        onPressed: () async {
+                          if (status=="new"){
+                            final selectedTime = await _selectTime(context);
+                            if (selectedTime == null)
+                              return;
+                            else {
+                              setState(() {
+                                time = selectedTime;
+                              });
+                            }
+                          };
+                          },
+                        child: Text(time.hour.toString()+":"+time.minute.toString(), style: kEntryDate),
+                      ),
                     ],
                   ),
                   Text(
@@ -207,6 +239,7 @@ class _NewEntryPageState extends State<NewEntryPage> {
                     child: EntryButton(
                       text: 'Save',
                       onPress: () async {
+                        dateTime = (DateFormat('dd-MM-yy – kk:mm').format(DateTime(date.year, date.month, date.day, time.hour, time.minute)));
                         Seizure entry = Seizure(date: dateTime,type: selectedType,length: length,feel: feel,note: note); 
                         if (status=="new"){
                           DatabaseService.db.createSeize(entry);
