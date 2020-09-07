@@ -16,7 +16,7 @@ Build to fit the Oneplus7t pro screen ratio only.
 ### Log pages 
 
 ### Basic statistics 
-
+<img src="https://i.imgur.com/juAZAq7.jpg" width="300"/>
 
 ### Options 
 Import/Export to .csv file 
