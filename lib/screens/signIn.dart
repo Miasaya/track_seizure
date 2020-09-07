@@ -53,6 +53,15 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Log in'),
                 onPressed: _handleSignIn,
               ),
+              RaisedButton(
+                child: Text('Skip'),
+                onPressed: (){
+                  Navigator.push(context, 
+                    MaterialPageRoute(builder: (context) {
+                      return HomePage();
+                  }));
+                },
+              ),
               Spacer(),
             ],
           ),
