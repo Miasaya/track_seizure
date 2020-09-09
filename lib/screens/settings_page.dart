@@ -72,7 +72,7 @@ class _SettingPageState extends State<SettingPage> {
           onPress: () {
             DatabaseService.db.deleteAll();
           }),
-      Settings(
+      /* Settings(
           icon: Icon(Feather.upload_cloud, size: 25),
           title: 'Sync Data with Google Drive',
           subtitle: 'Save your to your Drive account (NOT WORKING YET)',
@@ -90,7 +90,7 @@ class _SettingPageState extends State<SettingPage> {
           showTimePick: false,
           onPress: () async {
             await AuthManager.signOut();
-          }),
+          }), */
     ];
   }
 
