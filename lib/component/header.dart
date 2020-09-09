@@ -88,7 +88,7 @@ class EntryHeader extends StatelessWidget {
                 kTopGradientColor,
               ])),
           child: Image.asset(
-            'assets/images/stay.png',
+            'assets/images/OnlineLog.png',
             scale: 0.8,
           ),
         ));
